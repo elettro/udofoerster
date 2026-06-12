@@ -3,548 +3,372 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UdoFoerster.com — V3 with Video & Press Media</title>
+<title>UdoFoerster.com — V3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=EB+Garamond:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;600;700&family=Fraunces:wght@300;400;700;900&family=Newsreader:ital,wght@0,400;0,600;1,400&family=Raleway:wght@200;300;400;600;700&family=Bitter:wght@300;400;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Fraunces:wght@300;400;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f0f0ee}
 
 /* SWITCHER */
-#switcher {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
-  background: #1a1a1a; padding: 10px 20px;
-  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-}
-#switcher span { color: #888; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-right: 4px; white-space: nowrap; }
-#switcher button { padding: 5px 13px; border: 1px solid #444; background: transparent; color: #ccc; font-size: 11px; font-weight: 500; cursor: pointer; border-radius: 3px; transition: all 0.15s; white-space: nowrap; }
-#switcher button:hover { background: #333; color: #fff; }
-#switcher button.active { background: #C8102E; border-color: #C8102E; color: #fff; }
-.homepage { display: none; min-height: 100vh; }
-.homepage.active { display: block; }
-.pt-switcher { padding-top: 52px; }
+#switcher{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;padding:10px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;box-shadow:0 2px 12px rgba(0,0,0,0.4)}
+#switcher span{color:#888;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-right:4px;white-space:nowrap}
+#switcher button{padding:5px 13px;border:1px solid #444;background:transparent;color:#ccc;font-size:11px;font-weight:500;cursor:pointer;border-radius:3px;transition:all 0.15s;white-space:nowrap}
+#switcher button:hover{background:#333;color:#fff}
+#switcher button.active{background:#C8102E;border-color:#C8102E;color:#fff}
+.homepage{display:none;min-height:100vh}
+.homepage.active{display:block}
+.pt-switcher{padding-top:52px}
 
-/* =====================================================
+/* ==================== VIDEO EMBED ==================== */
+.video-outer{width:100%;position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
+.video-outer iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
+/* ==================== PRESS CARD GRID ==================== */
+.press-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pcard{display:flex;flex-direction:column;text-decoration:none;border-radius:6px;overflow:hidden;transition:transform 0.18s,box-shadow 0.18s}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.15)}
+.pcard-pub{padding:12px 18px;display:flex;align-items:center;gap:8px}
+/* Forbes */
+.forbes .pcard-pub{background:#000}
+.forbes-wordmark{font-family:'Inter',sans-serif;font-size:20px;font-weight:900;color:#fff;letter-spacing:-0.01em}
+.forbes-badge{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;color:#e8002d;border:1px solid #e8002d;padding:2px 5px;border-radius:2px;letter-spacing:0.08em;margin-left:4px}
+/* TBI */
+.tbi .pcard-pub{background:#111827}
+.tbi-name{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#fff}
+/* FTV */
+.ftv .pcard-pub{background:#003B82}
+.ftv-dot{width:8px;height:8px;background:#38BDF8;border-radius:50%;flex-shrink:0}
+.ftv-name{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:#fff;letter-spacing:0.04em}
+/* Card body */
+.pcard-body{padding:20px;flex:1;display:flex;flex-direction:column}
+.pcard-date{font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+.pcard-title{font-size:16px;font-weight:600;line-height:1.4;margin-bottom:10px;flex:1}
+.pcard-blurb{font-family:'Inter',sans-serif;font-size:12px;line-height:1.65;margin-bottom:14px}
+.pcard-cta{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px}
+.pcard-cta::after{content:'→'}
+
+/* ====================================================
    STYLE 1 — THE STATESMAN  Prussian Blue + Gold
-===================================================== */
-.s1 { font-family: 'Playfair Display', serif; background: #F7F5F0; color: #1B2A3B; }
-.s1 nav { background: #1B2A3B; display: flex; justify-content: space-between; align-items: center; padding: 0 60px; height: 64px; }
-.s1 .logo { color: #D4AF37; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; }
-.s1 nav a { color: #9BAAB7; font-family: 'Inter',sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; margin-left: 32px; letter-spacing: 0.05em; text-transform: uppercase; }
-.s1 nav a:hover { color: #D4AF37; }
-.s1 .hero { background: #1B2A3B; display: grid; grid-template-columns: 1fr 400px; min-height: 540px; }
-.s1 .hero-text { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
-.s1 .eyebrow { font-family: 'Inter',sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #D4AF37; margin-bottom: 20px; }
-.s1 h1 { font-size: 50px; line-height: 1.1; color: #F7F5F0; font-weight: 700; margin-bottom: 24px; }
-.s1 .hero-sub { font-family: 'Inter',sans-serif; font-size: 17px; line-height: 1.7; color: #9BAAB7; max-width: 480px; margin-bottom: 40px; }
-.s1 .btn-gold { display: inline-block; background: #D4AF37; color: #1B2A3B; font-family: 'Inter',sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 32px; text-decoration: none; width: fit-content; }
-.s1 .hero-img { background: url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat; position: relative; }
-.s1 .hero-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, #1B2A3B 0%, transparent 30%); }
-.s1 .hero-img-label { position: absolute; bottom: 0; left: 0; right: 0; background: #D4AF37; color: #1B2A3B; font-family: 'Inter',sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 20px; text-align: center; z-index: 2; }
-.s1 .stats-bar { background: #D4AF37; display: flex; justify-content: center; gap: 80px; padding: 28px 60px; }
-.s1 .stat { text-align: center; }
-.s1 .stat-num { font-size: 36px; font-weight: 900; color: #1B2A3B; }
-.s1 .stat-label { font-family: 'Inter',sans-serif; font-size: 12px; font-weight: 600; color: #1B2A3B; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em; }
+==================================================== */
+.s1{font-family:'Playfair Display',serif;background:#F7F5F0;color:#1B2A3B}
+.s1 nav{background:#1B2A3B;display:flex;justify-content:space-between;align-items:center;padding:0 60px;height:64px}
+.s1 .logo{color:#D4AF37;font-size:20px;font-weight:700;letter-spacing:0.05em}
+.s1 nav a{color:#9BAAB7;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;text-decoration:none;margin-left:32px;letter-spacing:0.05em;text-transform:uppercase}
+.s1 nav a:hover{color:#D4AF37}
+/* HERO */
+.s1 .hero{background:#1B2A3B;display:grid;grid-template-columns:1fr 400px;min-height:520px}
+.s1 .hero-text{padding:72px 60px;display:flex;flex-direction:column;justify-content:center}
+.s1 .eyebrow{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#D4AF37;margin-bottom:18px}
+.s1 h1{font-size:50px;line-height:1.1;color:#F7F5F0;font-weight:700;margin-bottom:22px}
+.s1 .hero-sub{font-family:'Inter',sans-serif;font-size:17px;line-height:1.7;color:#9BAAB7;max-width:460px;margin-bottom:36px}
+.s1 .btn-gold{display:inline-block;background:#D4AF37;color:#1B2A3B;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:14px 32px;text-decoration:none}
+.s1 .hero-img{background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat;position:relative}
+.s1 .hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,#1B2A3B 0%,transparent 30%)}
+.s1 .hero-img-label{position:absolute;bottom:0;left:0;right:0;background:#D4AF37;color:#1B2A3B;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:10px 20px;text-align:center;z-index:2}
+/* STATS */
+.s1 .stats-bar{background:#D4AF37;display:flex;justify-content:center;gap:80px;padding:26px 60px}
+.s1 .stat{text-align:center}
+.s1 .stat-num{font-size:34px;font-weight:900;color:#1B2A3B}
+.s1 .stat-label{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#1B2A3B;opacity:0.65;text-transform:uppercase;letter-spacing:0.08em}
+/* VIDEO SECTION */
+.s1 .video-section{background:#1B2A3B;padding:64px 60px}
+.s1 .vs-eyebrow{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#D4AF37;margin-bottom:10px}
+.s1 .vs-title{font-size:28px;color:#F7F5F0;font-weight:700;margin-bottom:4px}
+.s1 .vs-meta{font-family:'Inter',sans-serif;font-size:13px;color:#9BAAB7;margin-bottom:28px}
+.s1 .vs-layout{display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:start}
+.s1 .vs-desc{font-family:'Inter',sans-serif;font-size:15px;line-height:1.8;color:#9BAAB7;margin-top:20px}
+.s1 .vs-sidebar{padding:28px;background:rgba(255,255,255,0.05);border-left:3px solid #D4AF37}
+.s1 .vs-sidebar-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#D4AF37;margin-bottom:14px}
+.s1 .vs-sidebar p{font-family:'Inter',sans-serif;font-size:14px;line-height:1.8;color:#9BAAB7;margin-bottom:16px;font-style:italic}
+.s1 .vs-sidebar a{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:#D4AF37;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase}
+/* VP */
+.s1 .vp-section{padding:72px 60px;border-bottom:1px solid #E5DEC8}
+.s1 .section-eyebrow{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#D4AF37;margin-bottom:12px}
+.s1 h2{font-size:36px;line-height:1.2;color:#1B2A3B;margin-bottom:18px}
+.s1 .vp-intro{font-family:'Inter',sans-serif;font-size:16px;line-height:1.75;color:#4A5568;max-width:680px;margin-bottom:36px}
+.s1 .vp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-bottom:44px;border:1px solid #E5DEC8}
+.s1 .vp-card{padding:28px;border-right:1px solid #E5DEC8;border-bottom:1px solid #E5DEC8}
+.s1 .vp-card:nth-child(2n){border-right:none}
+.s1 .vp-card:nth-child(3),.s1 .vp-card:nth-child(4){border-bottom:none}
+.s1 .vp-icon{font-size:20px;margin-bottom:12px}
+.s1 .vp-card h3{font-size:19px;color:#1B2A3B;margin-bottom:8px}
+.s1 .vp-card p{font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;color:#6B7280}
+.s1 .context-block{background:#1B2A3B;padding:44px 48px}
+.s1 .context-block p{font-family:'Inter',sans-serif;font-size:16px;line-height:1.85;color:#9BAAB7;margin-bottom:18px}
+.s1 .context-block p:last-of-type{margin-bottom:28px}
+.s1 .signoff{font-size:26px;font-style:italic;color:#D4AF37}
+.s1 .signoff-name{font-family:'Inter',sans-serif;font-size:13px;color:rgba(212,175,55,0.55);font-weight:500;margin-top:5px}
+/* PRESS */
+.s1 .press-section{background:#111820;padding:64px 60px}
+.s1 .press-section .section-eyebrow{margin-bottom:12px}
+.s1 .press-section h2{font-size:30px;color:#F7F5F0;margin-bottom:32px}
+.s1 .press-cards .pcard-body{background:#1B2A3B}
+.s1 .press-cards .pcard-date{color:#D4AF37}
+.s1 .press-cards .pcard-title{color:#F7F5F0}
+.s1 .press-cards .pcard-blurb{color:#9BAAB7}
+.s1 .press-cards .pcard-cta{color:#D4AF37}
+.s1 footer{background:#0A0F16;padding:28px 60px;text-align:center;font-family:'Inter',sans-serif;font-size:12px;color:#4A5568}
 
-/* VALUE PROP SECTION — S1 */
-.s1 .vp-section { padding: 80px 60px; border-bottom: 1px solid #E5DEC8; }
-.s1 .vp-section .section-eyebrow { font-family: 'Inter',sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #D4AF37; margin-bottom: 12px; }
-.s1 .vp-section h2 { font-size: 38px; line-height: 1.2; color: #1B2A3B; margin-bottom: 20px; }
-.s1 .vp-intro { font-family: 'Inter',sans-serif; font-size: 17px; line-height: 1.75; color: #4A5568; max-width: 700px; margin-bottom: 40px; }
-.s1 .vp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; margin-bottom: 48px; border: 1px solid #E5DEC8; }
-.s1 .vp-card { padding: 32px; border-right: 1px solid #E5DEC8; border-bottom: 1px solid #E5DEC8; }
-.s1 .vp-card:nth-child(2n) { border-right: none; }
-.s1 .vp-card:nth-child(3), .s1 .vp-card:nth-child(4) { border-bottom: none; }
-.s1 .vp-card-icon { font-size: 22px; margin-bottom: 14px; }
-.s1 .vp-card h3 { font-size: 19px; color: #1B2A3B; margin-bottom: 8px; }
-.s1 .vp-card p { font-family: 'Inter',sans-serif; font-size: 14px; line-height: 1.7; color: #6B7280; }
-.s1 .context-block { background: #1B2A3B; padding: 48px; margin-bottom: 0; }
-.s1 .context-block p { font-family: 'Inter',sans-serif; font-size: 16px; line-height: 1.85; color: #9BAAB7; margin-bottom: 20px; }
-.s1 .context-block p:last-of-type { margin-bottom: 32px; }
-.s1 .signoff { font-size: 26px; font-style: italic; color: #D4AF37; }
-.s1 .signoff-name { font-family: 'Inter',sans-serif; font-size: 13px; color: rgba(212,175,55,0.6); font-weight: 500; margin-top: 6px; }
+/* ====================================================
+   STYLE 2 — THE STRATEGIST  Navy + Blue
+==================================================== */
+.s2{font-family:'Space Grotesk',sans-serif;background:#fff;color:#0D1B2E}
+.s2 nav{display:flex;justify-content:space-between;align-items:center;padding:0 80px;height:70px;border-bottom:1px solid #E5E9EF}
+.s2 .logo{font-size:17px;font-weight:700;color:#0D1B2E;letter-spacing:-0.02em}
+.s2 .logo span{color:#0040C8}
+.s2 nav a{font-size:14px;font-weight:500;color:#4B5563;text-decoration:none;margin-left:36px}
+.s2 nav a:hover{color:#0040C8}
+.s2 .btn-nav{background:#0040C8;color:#fff!important;padding:8px 20px;border-radius:4px}
+.s2 .hero{display:grid;grid-template-columns:1fr 480px;min-height:580px}
+.s2 .hero-left{padding:90px 80px;display:flex;flex-direction:column;justify-content:center;background:#F8FAFF}
+.s2 .badge{display:inline-flex;align-items:center;gap:8px;background:#EEF3FF;border:1px solid #C7D5F7;color:#0040C8;font-size:12px;font-weight:600;padding:6px 14px;border-radius:100px;width:fit-content;margin-bottom:26px}
+.s2 .badge::before{content:'';width:6px;height:6px;background:#0040C8;border-radius:50%}
+.s2 h1{font-size:46px;font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:#0D1B2E;margin-bottom:18px}
+.s2 h1 em{font-style:normal;color:#0040C8}
+.s2 .hero-sub{font-size:16px;line-height:1.65;color:#6B7280;max-width:420px;margin-bottom:32px}
+.s2 .cta-group{display:flex;gap:16px;align-items:center}
+.s2 .btn-primary{background:#0040C8;color:#fff;padding:13px 26px;border-radius:6px;font-size:14px;font-weight:600;text-decoration:none}
+.s2 .btn-secondary{color:#0040C8;font-size:14px;font-weight:600;text-decoration:none}
+.s2 .hero-right{background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat;position:relative}
+.s2 .hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,#0D1B2E 0%,transparent 50%)}
+.s2 .hero-right-card{position:absolute;bottom:28px;left:20px;right:20px;background:rgba(255,255,255,0.95);border-radius:10px;padding:16px 20px;z-index:2}
+.s2 .hero-right-card strong{font-size:14px;color:#0D1B2E;display:block;margin-bottom:3px}
+.s2 .hero-right-card span{font-size:13px;color:#6B7280}
+.s2 .kpi-row{display:flex;background:#0040C8}
+.s2 .kpi{flex:1;padding:30px;border-right:1px solid rgba(255,255,255,0.15);text-align:center}
+.s2 .kpi:last-child{border-right:none}
+.s2 .kpi-num{font-size:36px;font-weight:700;color:#fff}
+.s2 .kpi-label{font-size:12px;color:rgba(255,255,255,0.6);margin-top:3px}
+/* VIDEO */
+.s2 .video-section{background:#F8FAFF;padding:64px 80px;border-bottom:1px solid #E5E9EF}
+.s2 .vs-eyebrow{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#0040C8;margin-bottom:10px}
+.s2 .vs-title{font-size:26px;font-weight:700;color:#0D1B2E;margin-bottom:4px}
+.s2 .vs-meta{font-family:'Inter',sans-serif;font-size:13px;color:#9CA3AF;margin-bottom:24px}
+.s2 .vs-layout{display:grid;grid-template-columns:1fr 300px;gap:44px;align-items:start}
+.s2 .vs-desc{font-family:'Inter',sans-serif;font-size:15px;line-height:1.8;color:#6B7280;margin-top:18px}
+.s2 .vs-sidebar{background:#fff;border:1px solid #E5E9EF;border-radius:10px;padding:28px;border-left:4px solid #0040C8}
+.s2 .vs-sidebar-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#0040C8;margin-bottom:12px}
+.s2 .vs-sidebar p{font-family:'Inter',sans-serif;font-size:14px;line-height:1.8;color:#4B5563;margin-bottom:14px}
+.s2 .vs-sidebar a{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:#0040C8;text-decoration:none;letter-spacing:0.06em;text-transform:uppercase}
+/* VP */
+.s2 .vp-section{padding:72px 80px;background:#fff}
+.s2 h2{font-size:34px;font-weight:700;letter-spacing:-0.02em;color:#0D1B2E;margin-bottom:12px}
+.s2 .vp-lead{font-size:17px;color:#6B7280;line-height:1.7;max-width:600px;margin-bottom:44px}
+.s2 .vp-four{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:48px}
+.s2 .vp-tile{border:1px solid #E5E9EF;border-radius:10px;padding:24px 20px}
+.s2 .vp-tile-icon{font-size:22px;margin-bottom:12px}
+.s2 .vp-tile h3{font-size:15px;font-weight:600;color:#0D1B2E;margin-bottom:7px}
+.s2 .vp-tile p{font-size:13px;line-height:1.7;color:#6B7280}
+.s2 .context-row{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.s2 .context-col p{font-size:15px;line-height:1.85;color:#4B5563;margin-bottom:14px}
+.s2 .signoff-block{background:#F8FAFF;border-left:4px solid #0040C8;padding:28px 32px;border-radius:0 10px 10px 0}
+.s2 .signoff-quote{font-size:18px;font-style:italic;color:#0D1B2E;line-height:1.5;margin-bottom:14px}
+.s2 .signoff-sig{font-size:26px;font-style:italic;color:#0040C8;display:block;margin-bottom:3px}
+.s2 .signoff-title{font-size:12px;color:#9CA3AF;font-weight:500}
+/* PRESS */
+.s2 .press-section{background:#0D1B2E;padding:60px 80px}
+.s2 .press-section h2{font-size:26px;font-weight:700;color:#fff;margin-bottom:28px}
+.s2 .press-cards .pcard-body{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-top:none}
+.s2 .press-cards .pcard-date{color:#60A5FA}
+.s2 .press-cards .pcard-title{color:#E5E9EF}
+.s2 .press-cards .pcard-blurb{color:rgba(255,255,255,0.45)}
+.s2 .press-cards .pcard-cta{color:#60A5FA}
+.s2 footer{background:#060D18;padding:28px 80px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#374151}
+.s2 .footer-logo{font-size:14px;font-weight:700;color:#fff}
 
-.s1 .media-strip { background: #111820; padding: 60px; }
-.s1 .media-strip .section-eyebrow { font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#D4AF37; margin-bottom:12px; }
-.s1 .media-strip h2 { font-size:32px; color: #F7F5F0; margin-bottom: 32px; }
-.s1 .media-items { display: flex; gap: 24px; }
-.s1 .media-item { background: #1B2A3B; padding: 24px; flex: 1; border-left: 3px solid #D4AF37; }
-.s1 .media-source { font-family:'Inter',sans-serif; font-size:11px; color:#D4AF37; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; }
-.s1 .media-title { font-family:'Inter',sans-serif; font-size:14px; color:#CBD5E0; line-height:1.5; }
-.s1 footer { background: #0A0F16; padding: 32px 60px; text-align: center; font-family:'Inter',sans-serif; font-size:12px; color:#4A5568; }
+/* ====================================================
+   STYLE 3 — THE BOLD  Black + Red
+==================================================== */
+.s3{font-family:'Fraunces',serif;background:#0E0E0E;color:#F5F5F3}
+.s3 nav{display:flex;justify-content:space-between;align-items:center;padding:0 64px;height:70px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.s3 .logo{font-size:18px;font-weight:700;color:#F5F5F3}
+.s3 .logo span{color:#C8102E}
+.s3 nav a{font-family:'Inter',sans-serif;font-size:13px;color:rgba(245,245,243,0.45);text-decoration:none;margin-left:32px}
+.s3 nav a:hover{color:#F5F5F3}
+.s3 .hero{display:grid;grid-template-columns:1fr 1fr;min-height:540px}
+.s3 .hero-left{padding:80px 64px;display:flex;flex-direction:column;justify-content:center}
+.s3 .eyebrow{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#C8102E;margin-bottom:22px}
+.s3 h1{font-size:62px;font-weight:900;line-height:0.95;letter-spacing:-0.02em;color:#F5F5F3;margin-bottom:26px}
+.s3 h1 .accent{color:#C8102E}
+.s3 .hero-body{font-family:'Inter',sans-serif;font-size:16px;line-height:1.75;color:rgba(245,245,243,0.55);max-width:380px;margin-bottom:32px}
+.s3 .btn-red{display:inline-block;background:#C8102E;color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:15px 34px;text-decoration:none}
+.s3 .hero-right{background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat;position:relative}
+.s3 .hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,#0E0E0E 0%,transparent 40%)}
+.s3 .ticker{background:#C8102E;padding:14px 64px;display:flex;gap:44px;overflow:hidden}
+.s3 .tick{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#fff;letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap}
+/* VIDEO */
+.s3 .video-section{padding:64px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.s3 .vs-eyebrow{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#C8102E;margin-bottom:10px}
+.s3 .vs-title{font-size:26px;font-weight:900;color:#F5F5F3;margin-bottom:4px}
+.s3 .vs-meta{font-family:'Inter',sans-serif;font-size:13px;color:rgba(245,245,243,0.35);margin-bottom:24px}
+.s3 .vs-layout{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start}
+.s3 .vs-desc{font-family:'Inter',sans-serif;font-size:14px;line-height:1.8;color:rgba(245,245,243,0.5);margin-top:16px}
+.s3 .vs-sidebar{background:rgba(200,16,46,0.1);border:1px solid rgba(200,16,46,0.25);padding:24px}
+.s3 .vs-sidebar-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#C8102E;margin-bottom:12px}
+.s3 .vs-sidebar p{font-family:'Inter',sans-serif;font-size:14px;line-height:1.8;color:rgba(245,245,243,0.55);margin-bottom:14px;font-style:italic}
+.s3 .vs-sidebar a{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:#C8102E;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase}
+/* VP */
+.s3 .vp-section{padding:72px 64px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.s3 h2{font-size:40px;font-weight:900;letter-spacing:-0.02em;color:#F5F5F3;margin-bottom:14px}
+.s3 .vp-lead{font-family:'Inter',sans-serif;font-size:16px;line-height:1.75;color:rgba(245,245,243,0.5);max-width:600px;margin-bottom:40px}
+.s3 .vp-four{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06);margin-bottom:48px}
+.s3 .vp-d{background:#0E0E0E;padding:28px}
+.s3 .vp-d-n{font-size:40px;font-weight:900;color:rgba(200,16,46,0.18);line-height:1;margin-bottom:8px}
+.s3 .vp-d h3{font-size:16px;color:#F5F5F3;margin-bottom:7px}
+.s3 .vp-d p{font-family:'Inter',sans-serif;font-size:13px;color:rgba(245,245,243,0.42);line-height:1.65}
+.s3 .context-dark{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.s3 .ctx-p{font-family:'Inter',sans-serif;font-size:14px;line-height:1.85;color:rgba(245,245,243,0.5);margin-bottom:12px}
+.s3 .signoff-block{background:#C8102E;padding:30px 36px}
+.s3 .signoff-block .sq{font-size:19px;font-style:italic;color:#fff;line-height:1.5;margin-bottom:12px}
+.s3 .signoff-sig{font-size:28px;color:rgba(255,255,255,0.9);display:block;font-style:italic;margin-bottom:3px}
+.s3 .signoff-title{font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.55)}
+/* PRESS */
+.s3 .press-section{padding:60px 64px}
+.s3 .press-section h2{font-size:30px;font-weight:900;color:#F5F5F3;margin-bottom:24px}
+.s3 .press-cards .pcard-body{background:#1A1A1A;border:1px solid rgba(255,255,255,0.07);border-top:none}
+.s3 .press-cards .pcard-date{color:#C8102E}
+.s3 .press-cards .pcard-title{color:rgba(245,245,243,0.85)}
+.s3 .press-cards .pcard-blurb{color:rgba(245,245,243,0.38)}
+.s3 .press-cards .pcard-cta{color:#C8102E}
+.s3 footer{background:#060606;padding:24px 64px;text-align:center;font-family:'Inter',sans-serif;font-size:11px;color:rgba(245,245,243,0.2)}
 
-/* =====================================================
-   STYLE 2 — THE STRATEGIST  Navy + Blue + Space Grotesk
-===================================================== */
-.s2 { font-family: 'Space Grotesk', sans-serif; background: #FFFFFF; color: #0D1B2E; }
-.s2 nav { display: flex; justify-content: space-between; align-items: center; padding: 0 80px; height: 72px; border-bottom: 1px solid #E5E9EF; }
-.s2 .logo { font-size: 17px; font-weight: 700; color: #0D1B2E; letter-spacing: -0.02em; }
-.s2 .logo span { color: #0040C8; }
-.s2 nav a { font-size: 14px; font-weight: 500; color: #4B5563; text-decoration: none; margin-left: 36px; }
-.s2 nav a:hover { color: #0040C8; }
-.s2 .btn-nav { background: #0040C8; color: #fff !important; padding: 8px 20px; border-radius: 4px; }
-.s2 .hero { display: grid; grid-template-columns: 1fr 480px; min-height: 600px; }
-.s2 .hero-left { padding: 90px 80px; display: flex; flex-direction: column; justify-content: center; background: #F8FAFF; }
-.s2 .badge { display: inline-flex; align-items: center; gap: 8px; background: #EEF3FF; border: 1px solid #C7D5F7; color: #0040C8; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 100px; width: fit-content; margin-bottom: 28px; }
-.s2 .badge::before { content: ''; width: 6px; height: 6px; background: #0040C8; border-radius: 50%; }
-.s2 h1 { font-size: 48px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: #0D1B2E; margin-bottom: 20px; }
-.s2 h1 em { font-style: normal; color: #0040C8; }
-.s2 .hero-sub { font-size: 17px; font-weight: 400; line-height: 1.65; color: #6B7280; max-width: 440px; margin-bottom: 36px; }
-.s2 .cta-group { display: flex; gap: 16px; align-items: center; }
-.s2 .btn-primary { background: #0040C8; color: #fff; padding: 14px 28px; border-radius: 6px; font-size: 15px; font-weight: 600; text-decoration: none; }
-.s2 .btn-secondary { color: #0040C8; font-size: 15px; font-weight: 600; text-decoration: none; }
-.s2 .hero-right { background: url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat; position: relative; }
-.s2 .hero-right::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, #0D1B2E 0%, transparent 50%); }
-.s2 .hero-right-card { position:absolute; bottom:32px; left:24px; right:24px; background:rgba(255,255,255,0.95); border-radius:10px; padding:18px 22px; z-index:2; }
-.s2 .hero-right-card strong { font-size:15px; color:#0D1B2E; display:block; margin-bottom:3px; }
-.s2 .hero-right-card span { font-size:13px; color:#6B7280; }
-.s2 .kpi-row { display: flex; background: #0040C8; }
-.s2 .kpi { flex: 1; padding: 32px; border-right: 1px solid rgba(255,255,255,0.15); text-align: center; }
-.s2 .kpi:last-child { border-right: none; }
-.s2 .kpi-num { font-size: 38px; font-weight: 700; color: #fff; }
-.s2 .kpi-label { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 4px; }
+/* ====================================================
+   STYLE 4 — THE CONSULTANT  White + Green
+==================================================== */
+.s4{font-family:'Inter',sans-serif;background:#FCFCFA;color:#1A2527}
+.s4 nav{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:0 72px;height:68px;border-bottom:1px solid #EDE9DF}
+.s4 .logo{font-size:19px;font-weight:700;color:#1A2527}
+.s4 nav a{font-size:13px;color:#6B7280;text-decoration:none;margin-left:32px;font-weight:500}
+.s4 nav a:hover{color:#1A7A4A}
+.s4 .btn-cta-nav{background:#1A7A4A;color:#fff!important;padding:8px 20px;border-radius:6px}
+.s4 .hero{display:grid;grid-template-columns:1fr 1fr;min-height:540px}
+.s4 .hero-text{padding:72px;display:flex;flex-direction:column;justify-content:center;background:#fff}
+.s4 .trust-bar{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.s4 .trust-dot{width:8px;height:8px;background:#1A7A4A;border-radius:50%}
+.s4 .trust-text{font-size:12px;font-weight:600;color:#1A7A4A;letter-spacing:0.05em;text-transform:uppercase}
+.s4 h1{font-size:42px;font-weight:700;line-height:1.15;color:#1A2527;margin-bottom:16px}
+.s4 .hero-sub{font-size:15px;line-height:1.8;color:#6B7280;max-width:420px;margin-bottom:28px}
+.s4 .cta-pair{display:flex;gap:14px;align-items:center}
+.s4 .btn-green{background:#1A7A4A;color:#fff;font-size:14px;font-weight:600;padding:12px 24px;border-radius:6px;text-decoration:none}
+.s4 .link-btn{font-size:14px;font-weight:600;color:#1A2527;text-decoration:none}
+.s4 .hero-img-side{background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat}
+.s4 .trust-nums{background:#1A7A4A;display:flex;justify-content:space-around;padding:30px 72px}
+.s4 .tnum{text-align:center}
+.s4 .tnum-val{font-size:36px;font-weight:700;color:#fff}
+.s4 .tnum-label{font-size:11px;color:rgba(255,255,255,0.65);margin-top:3px;text-transform:uppercase;letter-spacing:0.08em}
+/* VIDEO */
+.s4 .video-section{background:#fff;padding:64px 72px;border-bottom:1px solid #EDE9DF}
+.s4 .vs-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#1A7A4A;margin-bottom:10px}
+.s4 .vs-title{font-size:24px;font-weight:700;color:#1A2527;margin-bottom:4px}
+.s4 .vs-meta{font-size:13px;color:#9CA3AF;margin-bottom:24px}
+.s4 .vs-layout{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start}
+.s4 .vs-desc{font-size:14px;line-height:1.8;color:#6B7280;margin-top:16px}
+.s4 .vs-sidebar{background:#F2FAF6;border:1px solid #B6DEC8;border-radius:10px;padding:26px;border-left:4px solid #1A7A4A}
+.s4 .vs-sidebar-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#1A7A4A;margin-bottom:10px}
+.s4 .vs-sidebar p{font-size:14px;line-height:1.8;color:#4B5563;margin-bottom:12px}
+.s4 .vs-sidebar a{font-size:11px;font-weight:700;color:#1A7A4A;text-decoration:none;letter-spacing:0.06em;text-transform:uppercase}
+/* VP */
+.s4 .vp-section{padding:64px 72px;background:#fff;border-bottom:1px solid #EDE9DF}
+.s4 h2{font-size:32px;font-weight:700;color:#1A2527;margin-bottom:10px}
+.s4 .vp-intro{font-size:15px;line-height:1.8;color:#555;max-width:680px;margin-bottom:36px}
+.s4 .vp-four-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:44px}
+.s4 .vp-fc{display:flex;gap:16px;align-items:flex-start;padding:22px;border:1px solid #EDE9DF;border-radius:8px;background:#FCFCFA}
+.s4 .vp-icon{width:38px;height:38px;background:#E8F5EE;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.s4 .vp-fc-text h3{font-size:16px;color:#1A2527;margin-bottom:3px}
+.s4 .vp-fc-text p{font-size:12px;color:#888;line-height:1.65}
+.s4 .context-two{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px}
+.s4 .ctx-p{font-size:14px;line-height:1.85;color:#555;margin-bottom:12px}
+.s4 .signoff-card{background:#F2FAF6;border:1px solid #B6DEC8;border-radius:10px;padding:28px 32px;border-left:4px solid #1A7A4A}
+.s4 .sq{font-size:18px;font-style:italic;color:#1A2527;line-height:1.55;margin-bottom:14px}
+.s4 .sig{font-size:26px;font-style:italic;color:#1A7A4A;display:block;margin-bottom:2px}
+.s4 .sig-sub{font-size:11px;color:#888}
+/* PRESS */
+.s4 .press-section{padding:56px 72px;background:#FCFCFA}
+.s4 .press-section h2{font-size:28px;font-weight:700;color:#1A2527;margin-bottom:24px}
+.s4 .press-cards .pcard-body{background:#fff;border:1px solid #EDE9DF;border-top:none;border-radius:0 0 6px 6px}
+.s4 .press-cards .pcard-date{color:#1A7A4A}
+.s4 .press-cards .pcard-title{color:#1A2527}
+.s4 .press-cards .pcard-blurb{color:#777}
+.s4 .press-cards .pcard-cta{color:#1A7A4A}
+.s4 footer{background:#1A2527;padding:36px 72px;display:flex;justify-content:space-between;align-items:center}
+.s4 footer p{font-size:12px;color:rgba(255,255,255,0.3)}
+.s4 .footer-name{font-size:15px;font-weight:600;color:#fff}
 
-/* VALUE PROP — S2 */
-.s2 .vp-section { padding: 80px; background: #fff; }
-.s2 .vp-section h2 { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; color: #0D1B2E; margin-bottom: 12px; }
-.s2 .vp-lead { font-size: 18px; color: #6B7280; line-height: 1.7; max-width: 640px; margin-bottom: 48px; }
-.s2 .vp-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 56px; }
-.s2 .vp-tile { border: 1px solid #E5E9EF; border-radius: 10px; padding: 28px 24px; }
-.s2 .vp-tile-icon { font-size: 24px; margin-bottom: 14px; }
-.s2 .vp-tile h3 { font-size: 16px; font-weight: 600; color: #0D1B2E; margin-bottom: 8px; }
-.s2 .vp-tile p { font-size: 13px; line-height: 1.7; color: #6B7280; }
-.s2 .context-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.s2 .context-col p { font-size: 15px; line-height: 1.85; color: #4B5563; margin-bottom: 16px; }
-.s2 .signoff-block { background: #F8FAFF; border-left: 4px solid #0040C8; padding: 32px 36px; border-radius: 0 10px 10px 0; }
-.s2 .signoff-quote { font-size: 20px; font-style: italic; color: #0D1B2E; line-height: 1.5; margin-bottom: 16px; }
-.s2 .signoff-sig { font-size: 28px; font-family: 'EB Garamond', serif; font-style: italic; color: #0040C8; display: block; margin-bottom: 4px; }
-.s2 .signoff-title { font-size: 12px; color: #9CA3AF; font-weight: 500; letter-spacing: 0.05em; }
-
-.s2 .media-strip { background: #0D1B2E; padding: 60px 80px; }
-.s2 .media-strip h2 { font-size:28px; font-weight:700; color:#fff; margin-bottom:32px; }
-.s2 .media-items { display:flex; gap:24px; }
-.s2 .media-item { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:24px; flex:1; }
-.s2 .media-source { font-size:11px; color:#60A5FA; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; }
-.s2 .media-title { font-size:14px; color:#CBD5E0; line-height:1.5; }
-.s2 footer { background:#060D18; padding:32px 80px; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#374151; }
-.s2 .footer-logo { font-size:15px; font-weight:700; color:#fff; }
-
-/* =====================================================
-   STYLE 3 — THE PATRIARCH  Forest Green + Cream
-===================================================== */
-.s3 { font-family: 'EB Garamond', serif; background: #F2EDDE; color: #1C3A2A; }
-.s3 nav { background: #F2EDDE; border-bottom: 2px solid #1C3A2A; display: flex; justify-content: space-between; align-items: center; padding: 0 64px; height: 68px; }
-.s3 .logo { font-size: 22px; font-weight: 400; color: #1C3A2A; letter-spacing: 0.03em; }
-.s3 nav a { font-family:'Inter',sans-serif; font-size:13px; font-weight:500; color:#1C3A2A; text-decoration:none; margin-left:36px; letter-spacing:0.05em; text-transform:uppercase; opacity:0.7; }
-.s3 nav a:hover { opacity:1; }
-.s3 .hero { background:#1C3A2A; padding:90px 64px; display:grid; grid-template-columns:1fr 340px; gap:64px; align-items:center; }
-.s3 h1 { font-size:56px; font-weight:400; line-height:1.1; color:#F2EDDE; margin-bottom:24px; font-style:italic; }
-.s3 .hero-body { font-size:18px; line-height:1.8; color:rgba(242,237,222,0.75); margin-bottom:36px; }
-.s3 .btn-cream { display:inline-block; border:2px solid #F2EDDE; color:#F2EDDE; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:13px 32px; text-decoration:none; }
-.s3 .portrait-placeholder { width:100%; aspect-ratio:3/4; background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat; opacity:0.85; }
-
-/* VALUE PROP — S3 */
-.s3 .vp-section { padding: 72px 64px; background: #F2EDDE; border-bottom: 1px solid rgba(28,58,42,0.15); }
-.s3 .vp-section h2 { font-size:38px; font-weight:400; font-style:italic; color:#1C3A2A; margin-bottom:20px; }
-.s3 .vp-intro { font-size:19px; line-height:1.8; color:#2D4A38; max-width:720px; margin-bottom:40px; }
-.s3 .vp-bullets { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-bottom:48px; }
-.s3 .vp-bullet { display:flex; gap:16px; align-items:flex-start; padding:24px; border:1px solid rgba(28,58,42,0.15); background:rgba(28,58,42,0.03); }
-.s3 .vp-bullet-mark { width:32px; height:32px; background:#1C3A2A; color:#F2EDDE; display:flex; align-items:center; justify-content:center; font-family:'Inter',sans-serif; font-size:13px; font-weight:700; flex-shrink:0; }
-.s3 .vp-bullet-text h3 { font-size:18px; color:#1C3A2A; margin-bottom:4px; }
-.s3 .vp-bullet-text p { font-family:'Inter',sans-serif; font-size:13px; color:#557060; line-height:1.65; }
-.s3 .context-para { font-size:18px; line-height:1.85; color:#2D4A38; max-width:760px; margin-bottom:20px; }
-.s3 .signoff-wrap { margin-top:40px; padding-top:32px; border-top:1px solid rgba(28,58,42,0.2); }
-.s3 .signoff-text { font-size:32px; font-style:italic; color:#1C3A2A; margin-bottom:4px; }
-.s3 .signoff-sub { font-family:'Inter',sans-serif; font-size:12px; color:rgba(28,58,42,0.5); font-weight:500; letter-spacing:0.08em; text-transform:uppercase; }
-
-.s3 .press { padding:64px; background:#1C3A2A; }
-.s3 .press h2 { font-size:34px; color:#F2EDDE; font-style:italic; margin-bottom:32px; }
-.s3 .press-items { display:flex; flex-direction:column; }
-.s3 .press-item { display:flex; gap:32px; align-items:baseline; padding:18px 0; border-bottom:1px solid rgba(242,237,222,0.15); }
-.s3 .press-pub { font-family:'Inter',sans-serif; font-size:11px; font-weight:700; color:#F2EDDE; text-transform:uppercase; letter-spacing:0.1em; width:140px; flex-shrink:0; opacity:0.6; }
-.s3 .press-title { font-size:18px; color:rgba(242,237,222,0.85); }
-.s3 footer { background:#F2EDDE; border-top:2px solid #1C3A2A; padding:28px 64px; display:flex; justify-content:space-between; align-items:center; }
-.s3 footer p { font-family:'Inter',sans-serif; font-size:12px; color:rgba(28,58,42,0.5); }
-
-/* =====================================================
-   STYLE 4 — THE MINIMALIST  White + Black
-===================================================== */
-.s4 { font-family: 'Cormorant Garamond', serif; background: #FAFAFA; color: #111; }
-.s4 nav { display:flex; justify-content:space-between; align-items:center; padding:28px 80px; border-bottom:1px solid #F0F0F0; }
-.s4 .logo { font-size:14px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; font-family:'Inter',sans-serif; color:#111; }
-.s4 nav a { font-family:'Inter',sans-serif; font-size:12px; font-weight:500; color:#888; text-decoration:none; margin-left:36px; letter-spacing:0.1em; text-transform:uppercase; }
-.s4 nav a:hover { color:#111; }
-.s4 .hero { padding:80px 80px 100px; max-width:920px; }
-.s4 .tiny-label { font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#999; margin-bottom:32px; }
-.s4 h1 { font-size:72px; font-weight:300; line-height:1.05; color:#111; margin-bottom:36px; letter-spacing:-0.01em; }
-.s4 h1 strong { font-weight:600; }
-.s4 .hero-body { font-family:'Inter',sans-serif; font-size:18px; line-height:1.8; color:#555; max-width:540px; margin-bottom:44px; }
-.s4 .btn-line { display:inline-block; border-bottom:1.5px solid #111; color:#111; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; padding-bottom:4px; }
-.s4 .portrait-full { width:100%; height:460px; background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat; filter:grayscale(15%); }
-.s4 .caption { padding:14px 80px; font-family:'Inter',sans-serif; font-size:12px; color:#888; border-bottom:1px solid #E5E5E5; }
-
-/* VALUE PROP — S4 */
-.s4 .vp-section { display:grid; grid-template-columns:1fr 1fr; gap:0; border-bottom:1px solid #E5E5E5; }
-.s4 .vp-left { padding:72px 80px; border-right:1px solid #E5E5E5; }
-.s4 .vp-right { padding:72px 80px; }
-.s4 h2 { font-size:40px; font-weight:300; line-height:1.2; color:#111; margin-bottom:24px; }
-.s4 .vp-lead { font-family:'Inter',sans-serif; font-size:16px; line-height:1.85; color:#555; margin-bottom:32px; }
-.s4 .vp-list { list-style:none; display:flex; flex-direction:column; gap:0; }
-.s4 .vp-list li { font-family:'Inter',sans-serif; font-size:14px; line-height:1.6; color:#444; padding:14px 0; border-bottom:1px solid #EBEBEB; display:flex; gap:12px; align-items:flex-start; }
-.s4 .vp-list li::before { content:'→'; color:#999; flex-shrink:0; margin-top:1px; }
-.s4 .context-block { margin-bottom:0; }
-.s4 .context-p { font-family:'Inter',sans-serif; font-size:15px; line-height:1.9; color:#555; margin-bottom:18px; }
-.s4 .signoff-area { padding-top:32px; border-top:1px solid #E5E5E5; margin-top:8px; }
-.s4 .signoff-text { font-size:34px; font-style:italic; color:#111; display:block; margin-bottom:6px; }
-.s4 .signoff-sub { font-family:'Inter',sans-serif; font-size:11px; color:#bbb; letter-spacing:0.1em; text-transform:uppercase; }
-
-.s4 .media-row { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid #E5E5E5; }
-.s4 .media-col { padding:48px 80px; border-right:1px solid #E5E5E5; }
-.s4 .media-col:last-child { border-right:none; }
-.s4 .media-src { font-family:'Inter',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#999; margin-bottom:10px; }
-.s4 .media-ttl { font-size:20px; color:#111; line-height:1.35; }
-.s4 footer { padding:40px 80px; border-top:1px solid #E5E5E5; display:flex; justify-content:space-between; font-family:'Inter',sans-serif; font-size:11px; color:#CCC; }
-
-/* =====================================================
-   STYLE 5 — THE BOLD  Black + German Red
-===================================================== */
-.s5 { font-family: 'Fraunces', serif; background: #0E0E0E; color: #F5F5F3; }
-.s5 nav { display:flex; justify-content:space-between; align-items:center; padding:0 64px; height:72px; border-bottom:1px solid rgba(255,255,255,0.08); }
-.s5 .logo { font-size:18px; font-weight:700; color:#F5F5F3; }
-.s5 .logo span { color:#C8102E; }
-.s5 nav a { font-family:'Inter',sans-serif; font-size:13px; color:rgba(245,245,243,0.45); text-decoration:none; margin-left:32px; }
-.s5 nav a:hover { color:#F5F5F3; }
-.s5 .hero { display:grid; grid-template-columns:1fr 1fr; min-height:560px; }
-.s5 .hero-left { padding:80px 64px; display:flex; flex-direction:column; justify-content:center; }
-.s5 .eyebrow { font-family:'Inter',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#C8102E; margin-bottom:22px; }
-.s5 h1 { font-size:64px; font-weight:900; line-height:0.95; letter-spacing:-0.02em; color:#F5F5F3; margin-bottom:28px; }
-.s5 h1 .accent { color:#C8102E; }
-.s5 .hero-body { font-family:'Inter',sans-serif; font-size:16px; line-height:1.75; color:rgba(245,245,243,0.55); max-width:400px; margin-bottom:36px; }
-.s5 .btn-red { display:inline-block; background:#C8102E; color:#fff; font-family:'Inter',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; padding:15px 34px; text-decoration:none; }
-.s5 .hero-right { background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat; position:relative; }
-.s5 .hero-right::after { content:''; position:absolute; inset:0; background:linear-gradient(to right,#0E0E0E 0%,transparent 40%); }
-.s5 .ticker { background:#C8102E; padding:14px 64px; display:flex; gap:48px; overflow:hidden; }
-.s5 .tick { font-family:'Inter',sans-serif; font-size:12px; font-weight:600; color:#fff; letter-spacing:0.1em; text-transform:uppercase; white-space:nowrap; }
-
-/* VALUE PROP — S5 */
-.s5 .vp-section { padding:80px 64px; border-bottom:1px solid rgba(255,255,255,0.06); }
-.s5 .vp-headline { font-size:44px; font-weight:900; letter-spacing:-0.02em; color:#F5F5F3; margin-bottom:16px; }
-.s5 .vp-lead { font-family:'Inter',sans-serif; font-size:17px; line-height:1.75; color:rgba(245,245,243,0.55); max-width:640px; margin-bottom:44px; }
-.s5 .vp-four-dark { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,0.06); margin-bottom:56px; }
-.s5 .vp-d { background:#0E0E0E; padding:32px; }
-.s5 .vp-d-n { font-size:44px; font-weight:900; color:rgba(200,16,46,0.2); line-height:1; margin-bottom:10px; }
-.s5 .vp-d h3 { font-size:17px; color:#F5F5F3; margin-bottom:8px; }
-.s5 .vp-d p { font-family:'Inter',sans-serif; font-size:13px; color:rgba(245,245,243,0.45); line-height:1.65; }
-.s5 .context-dark { display:grid; grid-template-columns:1fr 1fr; gap:48px; }
-.s5 .ctx-p { font-family:'Inter',sans-serif; font-size:15px; line-height:1.85; color:rgba(245,245,243,0.55); margin-bottom:16px; }
-.s5 .signoff-block { background:#C8102E; padding:36px 40px; }
-.s5 .signoff-block .sq { font-size:22px; font-style:italic; color:#fff; line-height:1.5; margin-bottom:16px; }
-.s5 .signoff-sig { font-size:30px; font-family:'Fraunces',serif; color:rgba(255,255,255,0.85); display:block; font-style:italic; margin-bottom:4px; }
-.s5 .signoff-title { font-family:'Inter',sans-serif; font-size:12px; color:rgba(255,255,255,0.55); }
-
-.s5 .media-section { padding:64px; }
-.s5 .media-section h2 { font-size:36px; font-weight:900; color:#F5F5F3; margin-bottom:32px; }
-.s5 .media-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,255,255,0.06); }
-.s5 .media-c { background:#0E0E0E; padding:28px; }
-.s5 .media-src { font-family:'Inter',sans-serif; font-size:11px; color:#C8102E; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; }
-.s5 .media-ttl { font-family:'Inter',sans-serif; font-size:14px; color:rgba(245,245,243,0.7); line-height:1.5; }
-.s5 footer { background:#060606; padding:32px 64px; text-align:center; font-family:'Inter',sans-serif; font-size:12px; color:rgba(245,245,243,0.2); }
-
-/* =====================================================
-   STYLE 6 — THE EDITORIAL  Newsprint + Broadsheet
-===================================================== */
-.s6 { font-family: 'Newsreader', serif; background: #F9F8F4; color: #1A1A1A; }
-.s6 .masthead { border-bottom:3px double #1A1A1A; padding:20px 60px; text-align:center; }
-.s6 .mast-top { font-family:'Inter',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#888; margin-bottom:8px; }
-.s6 .mast-title { font-size:60px; font-weight:600; letter-spacing:-0.02em; line-height:1; margin-bottom:8px; }
-.s6 .mast-sub { font-size:14px; font-style:italic; color:#555; }
-.s6 .mast-bar { display:flex; justify-content:space-between; align-items:center; padding:6px 60px; border-bottom:1px solid #1A1A1A; margin-top:12px; font-family:'Inter',sans-serif; font-size:11px; color:#777; }
-.s6 .feature { display:grid; grid-template-columns:1fr 320px; border-bottom:2px solid #1A1A1A; }
-.s6 .feature-text { padding:44px 60px; border-right:1px solid #1A1A1A; }
-.s6 .kicker { font-family:'Inter',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#fff; background:#C8102E; display:inline-block; padding:2px 8px; margin-bottom:14px; }
-.s6 h1 { font-size:44px; font-weight:600; line-height:1.15; margin-bottom:14px; }
-.s6 .dek { font-size:17px; font-style:italic; color:#555; line-height:1.6; margin-bottom:22px; border-top:1px solid #ccc; border-bottom:1px solid #ccc; padding:14px 0; }
-.s6 .feature-body { font-size:15px; line-height:1.85; color:#333; columns:2; column-gap:36px; }
-.s6 .feature-sidebar { padding:44px 28px; }
-.s6 .sidebar-img { width:100%; height:240px; background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat; margin-bottom:10px; }
-.s6 .sidebar-caption { font-family:'Inter',sans-serif; font-size:11px; color:#888; margin-bottom:20px; font-style:italic; }
-.s6 .pullquote { border-top:2px solid #1A1A1A; border-bottom:2px solid #1A1A1A; padding:14px 0; font-size:17px; font-style:italic; color:#1A1A1A; line-height:1.5; }
-
-/* VALUE PROP — S6 */
-.s6 .vp-section { border-bottom:2px solid #1A1A1A; }
-.s6 .vp-banner { background:#1A1A1A; padding:20px 60px; }
-.s6 .vp-banner h2 { font-size:16px; font-weight:600; color:#F9F8F4; letter-spacing:0.02em; }
-.s6 .vp-body { display:grid; grid-template-columns:1fr 1fr; }
-.s6 .vp-col { padding:40px 60px; border-right:1px solid #1A1A1A; }
-.s6 .vp-col:last-child { border-right:none; }
-.s6 .vp-col-head { font-family:'Inter',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:#888; border-bottom:2px solid #1A1A1A; padding-bottom:8px; margin-bottom:20px; }
-.s6 .vp-item { padding:12px 0; border-bottom:1px solid rgba(26,26,26,0.12); display:flex; gap:12px; }
-.s6 .vp-item-mark { width:20px; height:20px; background:#C8102E; color:#fff; font-family:'Inter',sans-serif; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
-.s6 .vp-item-text h3 { font-size:16px; color:#1A1A1A; margin-bottom:3px; }
-.s6 .vp-item-text p { font-family:'Inter',sans-serif; font-size:12px; color:#666; line-height:1.6; }
-.s6 .ctx-col p { font-size:15px; line-height:1.85; color:#333; margin-bottom:14px; }
-.s6 .signoff-ed { margin-top:16px; padding-top:16px; border-top:1px solid rgba(26,26,26,0.15); }
-.s6 .signoff-ed .sig { font-size:26px; font-style:italic; color:#1A1A1A; display:block; margin-bottom:2px; }
-.s6 .signoff-ed .sig-sub { font-family:'Inter',sans-serif; font-size:11px; color:#999; }
-
-.s6 .bottom-tier { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid #1A1A1A; }
-.s6 .bt-story { padding:32px 60px; border-right:1px solid #1A1A1A; }
-.s6 .bt-story:last-child { border-right:none; }
-.s6 .bt-cat { font-family:'Inter',sans-serif; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:#888; border-bottom:2px solid #1A1A1A; padding-bottom:7px; margin-bottom:14px; }
-.s6 .bt-story h3 { font-size:20px; font-weight:600; line-height:1.25; margin-bottom:8px; }
-.s6 .bt-story p { font-family:'Inter',sans-serif; font-size:13px; line-height:1.7; color:#555; }
-.s6 footer { padding:20px 60px; border-top:3px double #1A1A1A; display:flex; justify-content:space-between; font-family:'Inter',sans-serif; font-size:11px; color:#888; }
-
-/* =====================================================
-   STYLE 7 — THE GEOMETRIC  Gunmetal + Amber
-===================================================== */
-.s7 { font-family: 'Raleway', sans-serif; background: #1E1E2E; color: #EAEAEC; }
-.s7 nav { display:flex; justify-content:space-between; align-items:center; padding:0 64px; height:64px; border-bottom:1px solid rgba(234,234,236,0.1); }
-.s7 .logo { font-size:15px; font-weight:700; color:#F5A623; letter-spacing:0.15em; text-transform:uppercase; }
-.s7 nav a { font-size:12px; font-weight:500; color:rgba(234,234,236,0.45); text-decoration:none; margin-left:32px; letter-spacing:0.08em; text-transform:uppercase; }
-.s7 nav a:hover { color:#F5A623; }
-.s7 .hero { display:grid; grid-template-columns:1fr 1fr; min-height:580px; }
-.s7 .hero-left { padding:80px 64px; display:flex; flex-direction:column; justify-content:space-between; border-right:1px solid rgba(234,234,236,0.08); }
-.s7 .hero-tag { display:flex; align-items:center; gap:12px; margin-bottom:48px; }
-.s7 .hero-tag-line { width:36px; height:1px; background:#F5A623; }
-.s7 .hero-tag-text { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#F5A623; }
-.s7 h1 { font-size:54px; font-weight:700; line-height:1.0; letter-spacing:-0.01em; color:#EAEAEC; }
-.s7 h1 .block { display:block; }
-.s7 h1 .outline { color:transparent; -webkit-text-stroke:2px rgba(234,234,236,0.25); }
-.s7 .hero-body { font-size:15px; font-weight:300; line-height:1.8; color:rgba(234,234,236,0.55); max-width:380px; margin-bottom:28px; }
-.s7 .btn-amber { display:inline-block; background:#F5A623; color:#1E1E2E; font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:13px 30px; text-decoration:none; }
-.s7 .hero-right { position:relative; overflow:hidden; }
-.s7 .hero-right::before { content:''; position:absolute; inset:0; background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat; opacity:0.35; }
-.s7 .hero-right::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,transparent 50%,#1E1E2E 100%); }
-.s7 .hero-stat-row { position:absolute; bottom:40px; left:40px; right:40px; z-index:2; display:flex; gap:32px; }
-.s7 .hero-stat strong { font-size:34px; font-weight:700; color:#F5A623; display:block; }
-.s7 .hero-stat span { font-size:11px; color:rgba(234,234,236,0.45); letter-spacing:0.1em; text-transform:uppercase; }
-.s7 .band { background:#F5A623; display:flex; justify-content:space-around; padding:18px 64px; }
-.s7 .band-item { font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#1E1E2E; }
-
-/* VALUE PROP — S7 */
-.s7 .vp-section { padding:72px 64px; border-bottom:1px solid rgba(234,234,236,0.06); }
-.s7 .vp-eyebrow { display:flex; align-items:center; gap:14px; margin-bottom:32px; }
-.s7 .vp-eyebrow-line { width:40px; height:1px; background:#F5A623; }
-.s7 .vp-eyebrow-text { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#F5A623; }
-.s7 .vp-section h2 { font-size:40px; font-weight:700; color:#EAEAEC; margin-bottom:14px; letter-spacing:-0.01em; }
-.s7 .vp-lead { font-size:15px; font-weight:300; line-height:1.8; color:rgba(234,234,236,0.55); max-width:640px; margin-bottom:44px; }
-.s7 .vp-four-geo { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(234,234,236,0.06); margin-bottom:56px; }
-.s7 .vp-g { background:#1E1E2E; padding:30px 24px; border-top:2px solid rgba(245,166,35,0.3); }
-.s7 .vp-g h3 { font-size:15px; font-weight:600; color:#EAEAEC; margin-bottom:8px; }
-.s7 .vp-g p { font-size:13px; font-weight:300; color:rgba(234,234,236,0.5); line-height:1.65; }
-.s7 .ctx-two { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
-.s7 .ctx-p { font-size:14px; font-weight:300; line-height:1.85; color:rgba(234,234,236,0.55); margin-bottom:14px; }
-.s7 .signoff-geo { background:#F5A623; padding:28px 32px; margin-top:16px; }
-.s7 .signoff-geo .sig { font-family:'Fraunces',serif; font-size:28px; font-style:italic; color:#1E1E2E; display:block; margin-bottom:4px; }
-.s7 .signoff-geo .sig-sub { font-size:12px; font-weight:600; color:rgba(30,30,46,0.65); letter-spacing:0.06em; }
-
-.s7 .media-geo { padding:0 64px 64px; }
-.s7 .media-geo h2 { font-size:28px; font-weight:700; color:#EAEAEC; margin-bottom:24px; }
-.s7 .mgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(234,234,236,0.06); }
-.s7 .mc { background:#1E1E2E; padding:28px; }
-.s7 .mc-src { font-size:10px; font-weight:700; color:#F5A623; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px; }
-.s7 .mc-ttl { font-size:14px; font-weight:400; color:rgba(234,234,236,0.65); line-height:1.5; }
-.s7 footer { padding:28px 64px; border-top:1px solid rgba(234,234,236,0.08); display:flex; justify-content:space-between; font-size:11px; color:rgba(234,234,236,0.25); letter-spacing:0.08em; text-transform:uppercase; }
-
-/* =====================================================
-   STYLE 8 — EXECUTIVE PORTRAIT  Full-bleed
-===================================================== */
-.s8 { font-family: 'Inter', sans-serif; background: #fff; color: #111; }
-.s8 .hero { position:relative; height:100vh; min-height:640px; background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat; display:flex; flex-direction:column; justify-content:flex-end; }
-.s8 .hero::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,#000 0%,rgba(0,0,0,0.55) 40%,rgba(0,0,0,0.1) 100%); }
-.s8 nav { position:absolute; top:0; left:0; right:0; z-index:10; display:flex; justify-content:space-between; align-items:center; padding:28px 64px; }
-.s8 .logo { font-size:13px; font-weight:600; color:#fff; letter-spacing:0.2em; text-transform:uppercase; }
-.s8 nav a { font-size:13px; color:rgba(255,255,255,0.65); text-decoration:none; margin-left:32px; font-weight:500; }
-.s8 nav a:hover { color:#fff; }
-.s8 .hero-content { position:relative; z-index:5; padding:70px 64px 56px; }
-.s8 .hero-label { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:14px; }
-.s8 h1 { font-size:64px; font-weight:800; line-height:1.0; color:#fff; letter-spacing:-0.03em; margin-bottom:18px; }
-.s8 .hero-sub { font-size:18px; color:rgba(255,255,255,0.65); line-height:1.6; max-width:520px; }
-
-/* VALUE PROP — S8 */
-.s8 .vp-section { display:grid; grid-template-columns:2fr 1fr; gap:0; border-bottom:1px solid #E5E5E5; }
-.s8 .vp-main { padding:72px 64px; border-right:1px solid #E5E5E5; }
-.s8 .vp-main h2 { font-size:36px; font-weight:800; letter-spacing:-0.02em; color:#111; margin-bottom:12px; }
-.s8 .vp-main .vp-intro { font-size:17px; line-height:1.8; color:#555; margin-bottom:36px; }
-.s8 .vp-bullets-2col { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:40px; }
-.s8 .vp-b { border-left:3px solid #111; padding-left:16px; }
-.s8 .vp-b h3 { font-size:15px; font-weight:700; color:#111; margin-bottom:4px; }
-.s8 .vp-b p { font-size:13px; line-height:1.6; color:#777; }
-.s8 .vp-context p { font-size:15px; line-height:1.85; color:#555; margin-bottom:14px; }
-.s8 .vp-sidebar { padding:72px 48px; }
-.s8 .vs-label { font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#999; margin-bottom:20px; }
-.s8 .signoff-portrait { background:#111; padding:28px; margin-bottom:24px; }
-.s8 .sp-quote { font-size:16px; font-style:italic; color:rgba(255,255,255,0.8); line-height:1.55; margin-bottom:16px; }
-.s8 .sp-sig { font-family:'DM Serif Display',serif; font-style:italic; font-size:26px; color:#fff; display:block; margin-bottom:3px; }
-.s8 .sp-sub { font-size:11px; color:rgba(255,255,255,0.4); }
-.s8 .vp-facts { display:flex; flex-direction:column; gap:0; }
-.s8 .vp-fact { padding:14px 0; border-bottom:1px solid #E5E5E5; }
-.s8 .vp-fact-lbl { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#bbb; margin-bottom:3px; }
-.s8 .vp-fact-val { font-size:14px; font-weight:600; color:#111; }
-
-.s8 .services-dark { background:#111; padding:72px 64px; }
-.s8 .services-dark h2 { font-size:38px; font-weight:800; color:#fff; letter-spacing:-0.02em; margin-bottom:40px; }
-.s8 .svc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; }
-.s8 .svc-card { background:#1A1A1A; padding:32px; }
-.s8 .svc-card h3 { font-size:18px; font-weight:700; color:#fff; margin-bottom:8px; }
-.s8 .svc-card p { font-size:13px; line-height:1.7; color:#666; }
-.s8 footer { padding:36px 64px; border-top:1px solid #E5E5E5; display:flex; justify-content:space-between; font-size:12px; color:#999; }
-
-/* =====================================================
-   STYLE 9 — THE CONSULTANT  White + Green + Bitter
-===================================================== */
-.s9 { font-family: 'Bitter', serif; background: #FCFCFA; color: #1A2527; }
-.s9 nav { background:#fff; display:flex; justify-content:space-between; align-items:center; padding:0 72px; height:68px; border-bottom:1px solid #EDE9DF; }
-.s9 .logo { font-size:19px; font-weight:700; color:#1A2527; }
-.s9 nav a { font-family:'Inter',sans-serif; font-size:13px; color:#6B7280; text-decoration:none; margin-left:32px; font-weight:500; }
-.s9 nav a:hover { color:#1A7A4A; }
-.s9 .btn-cta-nav { background:#1A7A4A; color:#fff !important; padding:8px 20px; border-radius:6px; }
-.s9 .hero { display:grid; grid-template-columns:1fr 1fr; min-height:540px; align-items:stretch; }
-.s9 .hero-text { padding:72px; display:flex; flex-direction:column; justify-content:center; background:#fff; }
-.s9 .trust-bar { display:flex; align-items:center; gap:10px; margin-bottom:22px; }
-.s9 .trust-dot { width:8px; height:8px; background:#1A7A4A; border-radius:50%; }
-.s9 .trust-text { font-family:'Inter',sans-serif; font-size:12px; font-weight:600; color:#1A7A4A; letter-spacing:0.05em; text-transform:uppercase; }
-.s9 h1 { font-size:44px; font-weight:700; line-height:1.15; color:#1A2527; margin-bottom:18px; }
-.s9 .hero-sub { font-family:'Inter',sans-serif; font-size:15px; line-height:1.8; color:#6B7280; max-width:440px; margin-bottom:32px; }
-.s9 .cta-pair { display:flex; gap:16px; align-items:center; }
-.s9 .btn-green { background:#1A7A4A; color:#fff; font-family:'Inter',sans-serif; font-size:14px; font-weight:600; padding:12px 26px; border-radius:6px; text-decoration:none; }
-.s9 .link-btn { font-family:'Inter',sans-serif; font-size:14px; font-weight:600; color:#1A2527; text-decoration:none; }
-.s9 .hero-img-side { background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat; }
-.s9 .trust-nums { background:#1A7A4A; display:flex; justify-content:space-around; padding:32px 72px; }
-.s9 .tnum { text-align:center; }
-.s9 .tnum-val { font-size:38px; font-weight:700; color:#fff; }
-.s9 .tnum-label { font-family:'Inter',sans-serif; font-size:11px; color:rgba(255,255,255,0.65); margin-top:4px; text-transform:uppercase; letter-spacing:0.08em; }
-
-/* VALUE PROP — S9 */
-.s9 .vp-section { padding:72px; background:#fff; border-bottom:1px solid #EDE9DF; }
-.s9 .vp-section h2 { font-size:34px; font-weight:700; color:#1A2527; margin-bottom:12px; }
-.s9 .vp-intro { font-family:'Inter',sans-serif; font-size:16px; line-height:1.8; color:#555; max-width:700px; margin-bottom:40px; }
-.s9 .vp-four-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-bottom:52px; }
-.s9 .vp-fc { display:flex; gap:18px; align-items:flex-start; padding:24px; border:1px solid #EDE9DF; border-radius:8px; background:#FCFCFA; }
-.s9 .vp-icon { width:40px; height:40px; background:#E8F5EE; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
-.s9 .vp-fc-text h3 { font-size:17px; color:#1A2527; margin-bottom:4px; }
-.s9 .vp-fc-text p { font-family:'Inter',sans-serif; font-size:13px; color:#888; line-height:1.65; }
-.s9 .context-two { display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-bottom:40px; }
-.s9 .ctx-p { font-family:'Inter',sans-serif; font-size:15px; line-height:1.85; color:#555; margin-bottom:14px; }
-.s9 .signoff-card { background:#F2FAF6; border:1px solid #B6DEC8; border-radius:10px; padding:32px 36px; border-left:4px solid #1A7A4A; }
-.s9 .sq { font-size:19px; font-style:italic; color:#1A2527; line-height:1.55; margin-bottom:16px; }
-.s9 .sig { font-family:'EB Garamond',serif; font-size:28px; font-style:italic; color:#1A7A4A; display:block; margin-bottom:3px; }
-.s9 .sig-sub { font-family:'Inter',sans-serif; font-size:12px; color:#888; }
-
-.s9 .media-section { padding:64px 72px; background:#FCFCFA; }
-.s9 .media-section h2 { font-size:30px; font-weight:700; color:#1A2527; margin-bottom:28px; }
-.s9 .media-list { display:flex; flex-direction:column; }
-.s9 .media-item { display:flex; gap:24px; align-items:flex-start; padding:18px 0; border-bottom:1px solid #EDE9DF; }
-.s9 .mi-pub { font-family:'Inter',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#1A7A4A; width:160px; flex-shrink:0; padding-top:3px; }
-.s9 .mi-ttl { font-size:18px; color:#1A2527; }
-.s9 footer { background:#1A2527; padding:40px 72px; display:flex; justify-content:space-between; align-items:center; }
-.s9 footer p { font-family:'Inter',sans-serif; font-size:12px; color:rgba(255,255,255,0.35); }
-.s9 .footer-name { font-family:'Inter',sans-serif; font-size:15px; font-weight:600; color:#fff; }
-
-/* =====================================================
-   STYLE 10 — THE PIONEER  White + Red Manifesto
-===================================================== */
-.s10 { font-family: 'DM Serif Display', serif; background: #fff; color: #111; }
-.s10 nav { display:flex; justify-content:space-between; align-items:center; padding:28px 80px; border-bottom:1px solid #F0F0F0; }
-.s10 .logo { font-family:'Inter',sans-serif; font-size:13px; font-weight:700; color:#111; letter-spacing:0.15em; text-transform:uppercase; }
-.s10 nav a { font-family:'Inter',sans-serif; font-size:12px; color:#999; text-decoration:none; margin-left:36px; }
-.s10 nav a:hover { color:#111; }
-.s10 .mega-hero { padding:110px 80px; border-bottom:1px solid #F0F0F0; display:grid; grid-template-columns:1fr 360px; gap:80px; align-items:start; }
-.s10 h1 { font-size:76px; line-height:1.0; font-weight:400; font-style:italic; color:#111; margin-bottom:40px; }
-.s10 h1 em { font-style:normal; color:#C8102E; }
-.s10 .hero-body { font-family:'Inter',sans-serif; font-size:17px; line-height:1.9; color:#666; max-width:480px; margin-bottom:36px; }
-.s10 .two-buttons { display:flex; gap:20px; align-items:center; }
-.s10 .btn-solid { background:#111; color:#fff; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; padding:13px 28px; text-decoration:none; letter-spacing:0.05em; }
-.s10 .btn-ghost { font-family:'Inter',sans-serif; font-size:13px; font-weight:600; color:#111; text-decoration:none; border-bottom:1px solid #111; padding-bottom:2px; }
-.s10 .portrait-sq { width:100%; aspect-ratio:1; background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat; margin-bottom:14px; filter:grayscale(10%); }
-.s10 .portrait-caption { font-family:'Inter',sans-serif; font-size:11px; color:#999; line-height:1.5; }
-.s10 .portrait-caption strong { color:#111; display:block; font-size:13px; margin-bottom:2px; }
-
-/* VALUE PROP — S10 */
-.s10 .vp-section { padding:0 80px 80px; border-bottom:1px solid #F0F0F0; }
-.s10 .vp-label { font-family:'Inter',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#C8102E; border-bottom:1px solid #F0F0F0; padding:0 0 14px; margin-bottom:48px; }
-.s10 .vp-two-col { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-bottom:64px; }
-.s10 .vp-col-head { font-size:36px; font-weight:400; color:#111; margin-bottom:20px; }
-.s10 .vp-p { font-family:'Inter',sans-serif; font-size:15px; line-height:1.85; color:#666; margin-bottom:16px; }
-.s10 .vp-four-list { display:flex; flex-direction:column; gap:0; }
-.s10 .vp-li { display:flex; gap:20px; align-items:flex-start; padding:18px 0; border-bottom:1px solid #F0F0F0; }
-.s10 .vp-li-num { font-size:13px; font-family:'Inter',sans-serif; font-weight:700; color:#C8102E; width:24px; flex-shrink:0; padding-top:2px; }
-.s10 .vp-li-text { }
-.s10 .vp-li-text h3 { font-size:20px; color:#111; margin-bottom:3px; }
-.s10 .vp-li-text p { font-family:'Inter',sans-serif; font-size:13px; color:#999; line-height:1.6; }
-.s10 .manifesto-strip { padding:72px 80px; background:#111; }
-.s10 .manifesto-strip blockquote { font-size:34px; font-style:italic; color:#fff; line-height:1.4; max-width:800px; margin-bottom:24px; }
-.s10 .sig-block { display:flex; align-items:baseline; gap:20px; }
-.s10 .ms-sig { font-size:32px; font-style:italic; color:rgba(255,255,255,0.7); }
-.s10 .ms-sub { font-family:'Inter',sans-serif; font-size:12px; color:rgba(255,255,255,0.35); }
-
-.s10 .in-threes { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid #F0F0F0; }
-.s10 .third { padding:56px 80px; border-right:1px solid #F0F0F0; }
-.s10 .third:last-child { border-right:none; }
-.s10 .third-label { font-family:'Inter',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:#C8102E; margin-bottom:14px; }
-.s10 h2 { font-size:26px; font-weight:400; color:#111; margin-bottom:12px; }
-.s10 .third p { font-family:'Inter',sans-serif; font-size:14px; line-height:1.8; color:#777; }
-.s10 .media-row { padding:60px 80px; border-top:1px solid #F0F0F0; }
-.s10 .media-label { font-family:'Inter',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#999; border-bottom:1px solid #F0F0F0; padding-bottom:12px; margin-bottom:24px; }
-.s10 .media-items { display:flex; gap:32px; }
-.s10 .media-item { flex:1; }
-.s10 .mi-src { font-family:'Inter',sans-serif; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#C8102E; margin-bottom:6px; }
-.s10 .mi-title { font-size:19px; color:#111; line-height:1.35; }
-.s10 footer { padding:28px 80px; border-top:1px solid #F0F0F0; display:flex; justify-content:space-between; font-family:'Inter',sans-serif; font-size:11px; color:#CCC; }
-
-/* ============ SHARED VIDEO + PRESS CARDS ============ */
-.video-wrap{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px}
-.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.video-layout{display:grid;grid-template-columns:1fr 300px;gap:36px;align-items:start}
-.video-eyebrow{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px}
-.video-ttl{font-size:20px;font-weight:600;margin-bottom:3px;line-height:1.3}
-.video-date{font-family:'Inter',sans-serif;font-size:11px;opacity:0.5;margin-bottom:16px}
-.video-desc{font-family:'Inter',sans-serif;font-size:13px;line-height:1.8;opacity:0.65;margin-top:14px}
-.vid-section{padding:60px}
-/* press grid */
-.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.pc{display:flex;flex-direction:column;text-decoration:none;border-radius:5px;overflow:hidden;transition:transform 0.18s}
-.pc:hover{transform:translateY(-3px)}
-.pc-bar{padding:10px 16px}
-.forbes-bar{background:#000}
-.forbes-name{font-family:'Inter',sans-serif;font-size:17px;font-weight:900;color:#fff}
-.forbes-tag{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;color:#e8002d;border:1px solid #e8002d;padding:1px 4px;border-radius:2px;margin-left:6px;vertical-align:middle}
-.tbi-bar{background:#1a1a2e}
-.tbi-name{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff}
-.ftv-bar{background:#003366;display:flex;align-items:center;gap:8px}
-.ftv-dot{width:7px;height:7px;background:#00aaff;border-radius:50%}
-.ftv-name{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:#fff}
-.pc-body{padding:16px;flex:1;display:flex;flex-direction:column}
-.pc-date{font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
-.pc-ttl{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:8px;flex:1}
-.pc-blurb{font-family:'Inter',sans-serif;font-size:11px;line-height:1.65;margin-bottom:10px;opacity:0.65}
-.pc-cta{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase}
-.pc-cta::after{content:' →'}
-
+/* ====================================================
+   STYLE 5 — THE PIONEER  White + Red + DM Serif
+==================================================== */
+.s5{font-family:'DM Serif Display',serif;background:#fff;color:#111}
+.s5 nav{display:flex;justify-content:space-between;align-items:center;padding:26px 80px;border-bottom:1px solid #F0F0F0}
+.s5 .logo{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#111;letter-spacing:0.15em;text-transform:uppercase}
+.s5 nav a{font-family:'Inter',sans-serif;font-size:12px;color:#999;text-decoration:none;margin-left:32px}
+.s5 nav a:hover{color:#111}
+.s5 .mega-hero{padding:100px 80px;border-bottom:1px solid #F0F0F0;display:grid;grid-template-columns:1fr 340px;gap:72px;align-items:start}
+.s5 h1{font-size:72px;line-height:1.0;font-weight:400;font-style:italic;color:#111;margin-bottom:36px}
+.s5 h1 em{font-style:normal;color:#C8102E}
+.s5 .hero-body{font-family:'Inter',sans-serif;font-size:16px;line-height:1.9;color:#666;max-width:460px;margin-bottom:32px}
+.s5 .two-buttons{display:flex;gap:18px;align-items:center}
+.s5 .btn-solid{background:#111;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;padding:12px 26px;text-decoration:none;letter-spacing:0.05em}
+.s5 .btn-ghost{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#111;text-decoration:none;border-bottom:1px solid #111;padding-bottom:2px}
+.s5 .portrait-sq{width:100%;aspect-ratio:1;background:url('https://www.advanteam.de/wp-content/uploads/Udo_Foerster_official.jpg') center top/cover no-repeat;margin-bottom:12px;filter:grayscale(10%)}
+.s5 .portrait-caption{font-family:'Inter',sans-serif;font-size:11px;color:#999;line-height:1.5}
+.s5 .portrait-caption strong{color:#111;display:block;font-size:12px;margin-bottom:2px}
+/* VIDEO */
+.s5 .video-section{padding:64px 80px;border-bottom:1px solid #F0F0F0}
+.s5 .vs-eyebrow{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#C8102E;margin-bottom:10px}
+.s5 .vs-title{font-size:26px;font-weight:400;color:#111;margin-bottom:4px}
+.s5 .vs-meta{font-family:'Inter',sans-serif;font-size:13px;color:#bbb;margin-bottom:22px}
+.s5 .vs-layout{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start}
+.s5 .vs-desc{font-family:'Inter',sans-serif;font-size:14px;line-height:1.85;color:#777;margin-top:14px}
+.s5 .vs-sidebar{border-left:2px solid #F0F0F0;padding-left:28px}
+.s5 .vs-sidebar-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#C8102E;margin-bottom:12px}
+.s5 .vs-sidebar p{font-size:20px;font-style:italic;color:#111;line-height:1.45;margin-bottom:12px}
+.s5 .vs-sidebar a{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:#555;text-decoration:none;border-bottom:1px solid #ddd;padding-bottom:2px}
+/* VP */
+.s5 .vp-section{padding:0 80px 72px;border-bottom:1px solid #F0F0F0}
+.s5 .vp-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#C8102E;border-bottom:1px solid #F0F0F0;padding:0 0 12px;margin-bottom:44px}
+.s5 .vp-two-col{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-bottom:56px}
+.s5 .vp-col-head{font-size:32px;font-weight:400;color:#111;margin-bottom:16px}
+.s5 .vp-p{font-family:'Inter',sans-serif;font-size:14px;line-height:1.85;color:#666;margin-bottom:14px}
+.s5 .vp-four-list{display:flex;flex-direction:column}
+.s5 .vp-li{display:flex;gap:18px;align-items:flex-start;padding:15px 0;border-bottom:1px solid #F0F0F0}
+.s5 .vp-li-num{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:#C8102E;width:22px;flex-shrink:0;padding-top:2px}
+.s5 .vp-li-text h3{font-size:18px;color:#111;margin-bottom:2px}
+.s5 .vp-li-text p{font-family:'Inter',sans-serif;font-size:12px;color:#999;line-height:1.6}
+.s5 .manifesto-strip{padding:64px 80px;background:#111}
+.s5 .manifesto-strip blockquote{font-size:30px;font-style:italic;color:#fff;line-height:1.4;max-width:740px;margin-bottom:20px}
+.s5 .sig-block{display:flex;align-items:baseline;gap:16px}
+.s5 .ms-sig{font-size:28px;font-style:italic;color:rgba(255,255,255,0.65)}
+.s5 .ms-sub{font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.3)}
+.s5 .in-threes{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #F0F0F0}
+.s5 .third{padding:52px 80px;border-right:1px solid #F0F0F0}
+.s5 .third:last-child{border-right:none}
+.s5 .third-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#C8102E;margin-bottom:12px}
+.s5 h2{font-size:24px;font-weight:400;color:#111;margin-bottom:10px}
+.s5 .third p{font-family:'Inter',sans-serif;font-size:13px;line-height:1.8;color:#777}
+/* PRESS */
+.s5 .press-section{padding:60px 80px;border-top:1px solid #F0F0F0}
+.s5 .press-section .ps-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#999;border-bottom:1px solid #F0F0F0;padding-bottom:10px;margin-bottom:24px}
+.s5 .press-cards .pcard-body{background:#FAFAFA;border:1px solid #F0F0F0;border-top:none}
+.s5 .press-cards .pcard-date{color:#C8102E}
+.s5 .press-cards .pcard-title{color:#111;font-family:'DM Serif Display',serif;font-size:16px}
+.s5 .press-cards .pcard-blurb{color:#888}
+.s5 .press-cards .pcard-cta{color:#555}
+.s5 footer{padding:24px 80px;border-top:1px solid #F0F0F0;display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:11px;color:#CCC}
 </style>
 </head>
 <body>
 
-<!-- SWITCHER -->
 <div id="switcher">
   <span>Style:</span>
   <button onclick="show(1)" id="btn1" class="active">1 · Statesman</button>
   <button onclick="show(2)" id="btn2">2 · Strategist</button>
-  <button onclick="show(3)" id="btn3">3 · Patriarch</button>
-  <button onclick="show(4)" id="btn4">4 · Minimalist</button>
-  <button onclick="show(5)" id="btn5">5 · Bold</button>
-  <button onclick="show(6)" id="btn6">6 · Editorial</button>
-  <button onclick="show(7)" id="btn7">7 · Geometric</button>
-  <button onclick="show(8)" id="btn8">8 · Portrait</button>
-  <button onclick="show(9)" id="btn9">9 · Consultant</button>
-  <button onclick="show(10)" id="btn10">10 · Pioneer</button>
+  <button onclick="show(3)" id="btn3">3 · Bold</button>
+  <button onclick="show(4)" id="btn4">4 · Consultant</button>
+  <button onclick="show(5)" id="btn5">5 · Pioneer</button>
 </div>
 
-<!-- ==============================================
-     STYLE 1 — THE STATESMAN
-============================================== -->
+<!-- ====================== STYLE 1 — STATESMAN ====================== -->
 <div class="homepage s1 pt-switcher active" id="s1">
   <nav>
     <div class="logo">UDO FOERSTER</div>
@@ -553,73 +377,108 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
 
   <div class="hero">
     <div class="hero-text">
-      <div class="eyebrow">Strategic Communications · Aachen & Mainz</div>
+      <div class="eyebrow">Strategic Communications · Aachen &amp; Mainz</div>
       <h1>Thirty Years of Building What Endures</h1>
       <p class="hero-sub">Udo Foerster helps Germany's Mittelstand communicate with authority, scale with confidence, and lead with clarity — backed by three decades of hands-on entrepreneurship.</p>
       <a href="#" class="btn-gold">Begin the Conversation</a>
     </div>
     <div class="hero-img">
-      <div class="hero-img-label">Udo Foerster · Founder & CEO, advanteam</div>
+      <div class="hero-img-label">Udo Foerster · Founder &amp; CEO, advanteam</div>
     </div>
   </div>
 
   <div class="stats-bar">
-    <div class="stat"><div class="stat-num">30</div><div class="stat-label">Years of Entrepreneurship</div></div>
+    <div class="stat"><div class="stat-num">30</div><div class="stat-label">Years Active</div></div>
     <div class="stat"><div class="stat-num">1999</div><div class="stat-label">advanteam Founded</div></div>
     <div class="stat"><div class="stat-num">Forbes</div><div class="stat-label">International Media</div></div>
     <div class="stat"><div class="stat-num">DE</div><div class="stat-label">Mittelstand Focus</div></div>
   </div>
 
+  <!-- *** FINTECH.TV VIDEO *** -->
+  <div class="video-section">
+    <div class="vs-eyebrow">Featured Interview</div>
+    <div class="vs-title">Udo Foerster on Expanding Global Business Horizons</div>
+    <div class="vs-meta">fintech.tv · March 24, 2025</div>
+    <div class="vs-layout">
+      <div>
+        <div class="video-outer">
+          <iframe src="https://cms.fintech.tv/?p=29697&embed=1" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p class="vs-desc">Udo Foerster speaks with fintech.tv on German-American economic relations, the unprecedented challenges facing Germany's Mittelstand, and why building international networks is now a strategic necessity for mid-sized businesses.</p>
+      </div>
+      <div class="vs-sidebar">
+        <div class="vs-sidebar-label">About This Interview</div>
+        <p>"The challenges facing entrepreneurs today are unlike anything we have seen before — but with the right team and the right counsel, they are navigable."</p>
+        <a href="https://fintech.tv/udo-foerster-expanding-global-business-horizons/" target="_blank">View full feature on fintech.tv →</a>
+      </div>
+    </div>
+  </div>
+
   <div class="vp-section">
     <div class="section-eyebrow">Your Partner For</div>
-    <h2>Communication, Resilience & Crisis Management</h2>
+    <h2>Communication, Resilience &amp; Crisis Management</h2>
     <p class="vp-intro">Make your company big — and above all, strong. At advanteam you will find everything you need to ensure your business remains secure and stable in the future: from communications strategy to crisis response to international market access.</p>
     <div class="vp-grid">
-      <div class="vp-card">
-        <div class="vp-card-icon">🧭</div>
-        <h3>Proactive Action & Resilience</h3>
-        <p>Guidance and frameworks for companies that want to lead rather than react — building the organisational strength to navigate whatever comes next.</p>
-      </div>
-      <div class="vp-card">
-        <div class="vp-card-icon">⚡</div>
-        <h3>Corporate Crisis Management</h3>
-        <p>Tools and advisory support when the unexpected happens — structured crisis response that protects your reputation and stabilises your business.</p>
-      </div>
-      <div class="vp-card">
-        <div class="vp-card-icon">⚙️</div>
-        <h3>Automated Sales Processes</h3>
-        <p>Innovative, digitally-enabled sales systems that generate new business consistently — reducing manual effort while increasing reach and conversion.</p>
-      </div>
-      <div class="vp-card">
-        <div class="vp-card-icon">🌍</div>
-        <h3>International Communications</h3>
-        <p>Communication solutions of international relevance — helping German companies build credibility and visibility beyond their home market.</p>
-      </div>
+      <div class="vp-card"><div class="vp-icon">🧭</div><h3>Proactive Action &amp; Resilience</h3><p>Guidance and frameworks for companies that want to lead rather than react — building the strength to navigate whatever comes next.</p></div>
+      <div class="vp-card"><div class="vp-icon">⚡</div><h3>Corporate Crisis Management</h3><p>Tools and advisory support when the unexpected happens — structured crisis response that protects your reputation and stabilises your business.</p></div>
+      <div class="vp-card"><div class="vp-icon">⚙️</div><h3>Automated Sales Processes</h3><p>Innovative, digitally-enabled sales systems that generate new business consistently — reducing manual effort while increasing reach and conversion.</p></div>
+      <div class="vp-card"><div class="vp-icon">🌍</div><h3>International Communications</h3><p>Communication solutions of international relevance — helping German companies build credibility and visibility beyond their home market.</p></div>
     </div>
-
     <div class="context-block">
       <p>The coronavirus crisis, the war in Ukraine, and today's geopolitical situation present entrepreneurs with unprecedented challenges. The first step is always the same: review and secure your resources. From there, the path forward requires clear thinking, trusted counsel, and the right team.</p>
-      <p>Added to this is the role of artificial intelligence. It offers enormous opportunities and potential — but also real risks when goals and expectations are set too high. Access to international markets is also becoming increasingly important, especially for small and medium-sized enterprises. advanteam helps you build the right contacts — with the right investors, the right clients, and the right partners.</p>
+      <p>Added to this is artificial intelligence. It offers enormous opportunities and potential — but also real risks when goals and expectations are set too high. Access to international markets is also becoming increasingly important, especially for small and medium-sized enterprises. advanteam helps you build the right contacts — with the right investors, the right clients, and the right partners.</p>
       <div class="signoff">Yours sincerely, Udo Foerster</div>
-      <div class="signoff-name">Founder & CEO, advanteam · Nieder-Olm bei Mainz</div>
+      <div class="signoff-name">Founder &amp; CEO, advanteam · Nieder-Olm bei Mainz</div>
     </div>
   </div>
 
-  <div class="media-strip">
+  <!-- *** PRESS CARDS *** -->
+  <div class="press-section">
     <div class="section-eyebrow">As Seen In</div>
     <h2>Featured in International Media</h2>
-    <div class="media-items">
-      <div class="media-item"><div class="media-source">Fintech.tv · March 2025</div><div class="media-title">Expanding Global Business Horizons — Notes on German-American Economic Relations</div></div>
-      <div class="media-item"><div class="media-source">Forbes · August 2025</div><div class="media-title">Why Enterprise AI Still Can't Deliver on Its Promise</div></div>
-      <div class="media-item"><div class="media-source">The Business Influencer · Nov 2025</div><div class="media-title">Hidden Champions: It's Time to Step into the Spotlight</div></div>
+    <div class="press-cards">
+      <!-- Fintech.tv -->
+      <a class="pcard ftv" href="https://fintech.tv/udo-foerster-expanding-global-business-horizons/" target="_blank" rel="noopener">
+        <div class="pcard-pub ftv-bar"><div class="ftv-dot"></div><span class="ftv-name">fintech.tv</span></div>
+        <div class="pcard-body">
+          <div class="pcard-date">March 24, 2025</div>
+          <div class="pcard-title">Expanding Global Business Horizons — German-American Economic Relations</div>
+          <div class="pcard-blurb">On the forces reshaping German-American economic ties and what they mean for entrepreneurs navigating global markets.</div>
+          <div class="pcard-cta">Watch &amp; read</div>
+        </div>
+      </a>
+      <!-- Forbes -->
+      <a class="pcard forbes" href="https://www.forbes.com/sites/kolawolesamueladebayo/2025/08/18/why-enterprise-ai-still-cant-deliver-on-its-promise/" target="_blank" rel="noopener">
+        <div class="pcard-pub forbes-bar">
+          <span class="forbes-wordmark">Forbes</span>
+          <span class="forbes-badge">FEATURED</span>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-date">August 18, 2025</div>
+          <div class="pcard-title">Why Enterprise AI Still Can't Deliver on Its Promise</div>
+          <div class="pcard-blurb">Udo Foerster on the gap between AI expectations and business reality — and what leaders should prioritise instead.</div>
+          <div class="pcard-cta">Read on Forbes</div>
+        </div>
+      </a>
+      <!-- The Business Influencer -->
+      <a class="pcard tbi" href="https://thebusinessinfluencer.co.uk/hidden-champions-its-time-to-step-into-the-spotlight/" target="_blank" rel="noopener">
+        <div class="pcard-pub tbi-bar">
+          <span class="tbi-name">The Business Influencer</span>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-date">November 25, 2025</div>
+          <div class="pcard-title">Hidden Champions: It's Time to Step into the Spotlight</div>
+          <div class="pcard-blurb">Germany's strongest companies are often its least visible. Foerster makes the case for why that must change — and how.</div>
+          <div class="pcard-cta">Read the article</div>
+        </div>
+      </a>
     </div>
   </div>
-  <footer>© 2025 Udo Foerster · advanteam Kommunikation & Unternehmensberatung · Nieder-Olm bei Mainz · Impressum · Datenschutz</footer>
+
+  <footer>© 2025 Udo Foerster · advanteam Kommunikation &amp; Unternehmensberatung · Nieder-Olm bei Mainz · Impressum · Datenschutz</footer>
 </div>
 
-<!-- ==============================================
-     STYLE 2 — THE STRATEGIST
-============================================== -->
+<!-- ====================== STYLE 2 — STRATEGIST ====================== -->
 <div class="homepage s2 pt-switcher" id="s2">
   <nav>
     <div class="logo">Udo <span>Foerster</span></div>
@@ -630,16 +489,10 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
       <div class="badge">30 Years · Strategic Authority</div>
       <h1>The partner Germany's <em>Mittelstand</em> trusts.</h1>
       <p class="hero-sub">Senior advisor to mid-sized companies on communications, digital transformation, and market positioning. Founded advanteam in 1999. Now advising from Mainz to the world.</p>
-      <div class="cta-group">
-        <a href="#" class="btn-primary">Work With Udo</a>
-        <a href="#" class="btn-secondary">View Expertise →</a>
-      </div>
+      <div class="cta-group"><a href="#" class="btn-primary">Work With Udo</a><a href="#" class="btn-secondary">View Expertise →</a></div>
     </div>
     <div class="hero-right">
-      <div class="hero-right-card">
-        <strong>Udo Foerster</strong>
-        <span>Founder & CEO · advanteam · Nieder-Olm, Germany</span>
-      </div>
+      <div class="hero-right-card"><strong>Udo Foerster</strong><span>Founder &amp; CEO · advanteam · Nieder-Olm, Germany</span></div>
     </div>
   </div>
   <div class="kpi-row">
@@ -649,8 +502,28 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
     <div class="kpi"><div class="kpi-num">RTL</div><div class="kpi-label">Media Background</div></div>
   </div>
 
+  <!-- *** FINTECH.TV VIDEO *** -->
+  <div class="video-section">
+    <div class="vs-eyebrow">Watch</div>
+    <div class="vs-title">Udo Foerster: Expanding Global Business Horizons</div>
+    <div class="vs-meta">fintech.tv · March 24, 2025</div>
+    <div class="vs-layout">
+      <div>
+        <div class="video-outer">
+          <iframe src="https://cms.fintech.tv/?p=29697&embed=1" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p class="vs-desc">In this fintech.tv interview, Foerster discusses German-American economic relations, the challenges facing mid-sized businesses, and why access to international markets is becoming critical for the Mittelstand.</p>
+      </div>
+      <div class="vs-sidebar">
+        <div class="vs-sidebar-label">About This Feature</div>
+        <p>Udo Foerster speaks as one of Germany's leading entrepreneurial voices on international business strategy, geopolitical risk, and market development for mid-sized companies.</p>
+        <a href="https://fintech.tv/udo-foerster-expanding-global-business-horizons/" target="_blank">View on fintech.tv →</a>
+      </div>
+    </div>
+  </div>
+
   <div class="vp-section">
-    <h2>Your partner for communication, resilience & crisis management.</h2>
+    <h2>Your partner for communication, resilience &amp; crisis management.</h2>
     <p class="vp-lead">Make your company big — and above all, strong. At advanteam you will find everything you need to keep your business secure, stable, and growing in a world that demands both agility and endurance.</p>
     <div class="vp-four">
       <div class="vp-tile"><div class="vp-tile-icon">🧭</div><h3>Proactive Resilience</h3><p>Frameworks for anticipating disruption — before it reaches your business.</p></div>
@@ -660,138 +533,40 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
     </div>
     <div class="context-row">
       <div class="context-col">
-        <p>The coronavirus crisis, the war in Ukraine, and the current geopolitical situation present entrepreneurs with unprecedented challenges. Reviewing and securing your resources is the first step. From there, it takes clear strategy, trusted counsel, and a team that has faced these challenges before.</p>
+        <p>The coronavirus crisis, the war in Ukraine, and the geopolitical situation present entrepreneurs with unprecedented challenges. Reviewing and securing resources is the first step. From there, it takes clear strategy, trusted counsel, and a team that has faced these challenges before.</p>
         <p>Access to international markets is also becoming increasingly important — especially for small and medium-sized enterprises. advanteam helps you build new contacts with potential customers and investors, through our expertise and our network.</p>
       </div>
       <div class="signoff-block">
         <p class="signoff-quote">"Added to all of this is the use of artificial intelligence — it offers enormous opportunities, but also real risks when expectations are set too high. We look forward to helping you navigate all of it."</p>
         <span class="signoff-sig">Yours sincerely, Udo Foerster</span>
-        <span class="signoff-title">Founder & CEO, advanteam · Nieder-Olm bei Mainz</span>
+        <span class="signoff-title">Founder &amp; CEO, advanteam · Nieder-Olm bei Mainz</span>
       </div>
     </div>
   </div>
 
-  <div class="media-strip">
+  <!-- *** PRESS CARDS *** -->
+  <div class="press-section">
     <h2>Featured in International Media</h2>
-    <div class="media-items">
-      <div class="media-item"><div class="media-source">Fintech.tv · March 2025</div><div class="media-title">Expanding Global Business Horizons</div></div>
-      <div class="media-item"><div class="media-source">Forbes · August 2025</div><div class="media-title">Why Enterprise AI Still Can't Deliver on Its Promise</div></div>
-      <div class="media-item"><div class="media-source">The Business Influencer · Nov 2025</div><div class="media-title">Hidden Champions: It's Time to Step into the Spotlight</div></div>
+    <div class="press-cards">
+      <a class="pcard ftv" href="https://fintech.tv/udo-foerster-expanding-global-business-horizons/" target="_blank" rel="noopener">
+        <div class="pcard-pub ftv-bar"><div class="ftv-dot"></div><span class="ftv-name">fintech.tv</span></div>
+        <div class="pcard-body"><div class="pcard-date">March 24, 2025</div><div class="pcard-title">Expanding Global Business Horizons</div><div class="pcard-blurb">On German-American economic ties and the opportunities ahead for the Mittelstand.</div><div class="pcard-cta">Watch &amp; read</div></div>
+      </a>
+      <a class="pcard forbes" href="https://www.forbes.com/sites/kolawolesamueladebayo/2025/08/18/why-enterprise-ai-still-cant-deliver-on-its-promise/" target="_blank" rel="noopener">
+        <div class="pcard-pub forbes-bar"><span class="forbes-wordmark">Forbes</span><span class="forbes-badge">FEATURED</span></div>
+        <div class="pcard-body"><div class="pcard-date">August 18, 2025</div><div class="pcard-title">Why Enterprise AI Still Can't Deliver on Its Promise</div><div class="pcard-blurb">On the gap between AI expectations and business reality — and what leaders should prioritise instead.</div><div class="pcard-cta">Read on Forbes</div></div>
+      </a>
+      <a class="pcard tbi" href="https://thebusinessinfluencer.co.uk/hidden-champions-its-time-to-step-into-the-spotlight/" target="_blank" rel="noopener">
+        <div class="pcard-pub tbi-bar"><span class="tbi-name">The Business Influencer</span></div>
+        <div class="pcard-body"><div class="pcard-date">November 25, 2025</div><div class="pcard-title">Hidden Champions: It's Time to Step into the Spotlight</div><div class="pcard-blurb">Germany's strongest companies are often its least visible. Why that must change.</div><div class="pcard-cta">Read the article</div></div>
+      </a>
     </div>
   </div>
   <footer><div class="footer-logo">Udo Foerster</div><p>© 2025 advanteam · Nieder-Olm bei Mainz · Impressum</p></footer>
 </div>
 
-<!-- ==============================================
-     STYLE 3 — THE PATRIARCH
-============================================== -->
+<!-- ====================== STYLE 3 — THE BOLD ====================== -->
 <div class="homepage s3 pt-switcher" id="s3">
-  <nav>
-    <div class="logo">Udo Foerster</div>
-    <div><a href="#">About</a><a href="#">Practice</a><a href="#">Media</a><a href="#">Contact</a></div>
-  </nav>
-  <div class="hero">
-    <div>
-      <h1>Counsel forged in three decades of enterprise.</h1>
-      <p class="hero-body">Strategic communications and business consulting for companies that want to grow with purpose — and endure what others cannot.</p>
-      <a href="#" class="btn-cream">Engage Udo Foerster</a>
-    </div>
-    <div class="portrait-wrap"><div class="portrait-placeholder"></div></div>
-  </div>
-
-  <div class="vp-section">
-    <h2>Your partner for communication, resilience and crisis management.</h2>
-    <p class="vp-intro">Make your company big — and above all, strong. At advanteam you will find everything you need to ensure your business remains secure and stable in the future. The geopolitical challenges of our time demand more than good instincts. They demand the right partner.</p>
-    <div class="vp-bullets">
-      <div class="vp-bullet">
-        <div class="vp-bullet-mark">I</div>
-        <div class="vp-bullet-text"><h3>Proactive Action & Resilience</h3><p>Guidance and orientation for companies that choose to lead — not react — to the challenges of a complex world.</p></div>
-      </div>
-      <div class="vp-bullet">
-        <div class="vp-bullet-mark">II</div>
-        <div class="vp-bullet-text"><h3>Tools for Corporate Crises</h3><p>Structured advisory and practical tools that provide clarity and direction when your business faces unexpected disruption.</p></div>
-      </div>
-      <div class="vp-bullet">
-        <div class="vp-bullet-mark">III</div>
-        <div class="vp-bullet-text"><h3>Automated Sales Processes</h3><p>Innovative, digitally-enabled systems that build consistent pipeline — freeing your team to focus on what matters most.</p></div>
-      </div>
-      <div class="vp-bullet">
-        <div class="vp-bullet-mark">IV</div>
-        <div class="vp-bullet-text"><h3>International Communications</h3><p>Communication strategies that carry weight beyond Germany — credibility and visibility on an international stage.</p></div>
-      </div>
-    </div>
-    <p class="context-para">The coronavirus crisis, the war in Ukraine, and the geopolitical situation present entrepreneurs with challenges none of us have seen before. The first step is to review and secure resources. Added to this is the use of artificial intelligence — enormous in its potential, but also significant in its risks when expectations exceed reality.</p>
-    <p class="context-para">Access to international markets is becoming ever more important, especially for the Mittelstand. advanteam helps build the contacts you need — with investors, clients, and partners — through our expertise and our network.</p>
-    <div class="signoff-wrap">
-      <div class="signoff-text">Yours sincerely, Udo Foerster</div>
-      <div class="signoff-sub">Founder & CEO, advanteam · Nieder-Olm bei Mainz</div>
-    </div>
-  </div>
-
-  <div class="press">
-    <h2>Selected International Media</h2>
-    <div class="press-items">
-      <div class="press-item"><div class="press-pub">Fintech.tv</div><div class="press-title">Expanding Global Business Horizons — German-American Economic Relations, March 2025</div></div>
-      <div class="press-item"><div class="press-pub">Forbes</div><div class="press-title">Why Enterprise AI Still Can't Deliver on Its Promise, August 2025</div></div>
-      <div class="press-item"><div class="press-pub">The Business Influencer</div><div class="press-title">Hidden Champions: It's Time to Step into the Spotlight, November 2025</div></div>
-    </div>
-  </div>
-  <footer><p>© 2025 advanteam · Nieder-Olm bei Mainz · Impressum · Datenschutz</p><p>LinkedIn · XING · Facebook</p></footer>
-</div>
-
-<!-- ==============================================
-     STYLE 4 — THE MINIMALIST
-============================================== -->
-<div class="homepage s4 pt-switcher" id="s4">
-  <nav>
-    <div class="logo">UDO FOERSTER</div>
-    <div><a href="#">About</a><a href="#">Work</a><a href="#">Press</a><a href="#">Contact</a></div>
-  </nav>
-  <div class="hero">
-    <div class="tiny-label">Strategic Advisor · Entrepreneur · Mainz, Germany</div>
-    <h1><strong>Trusted.</strong><br>For thirty years.</h1>
-    <p class="hero-body">Udo Foerster helps Germany's most determined companies become more visible, more resilient, and better prepared for what comes next.</p>
-    <a href="#" class="btn-line">Start a Conversation</a>
-  </div>
-  <div class="portrait-full"></div>
-  <div class="caption">Udo Foerster, Founder & CEO — advanteam Kommunikation & Unternehmensberatung, Nieder-Olm bei Mainz</div>
-
-  <div class="vp-section">
-    <div class="vp-left">
-      <h2>Your partner for communication, resilience & crisis management.</h2>
-      <p class="vp-lead">Make your company big — and above all, strong. At advanteam you will find everything needed to ensure your business remains secure and stable — now and in the future.</p>
-      <ul class="vp-list">
-        <li>Guidance for proactive action and resilience</li>
-        <li>Tools and advice for corporate crises</li>
-        <li>Innovative automated sales processes</li>
-        <li>Communication solutions of international relevance</li>
-      </ul>
-    </div>
-    <div class="vp-right">
-      <div class="context-block">
-        <p class="context-p">The coronavirus crisis, the war in Ukraine, and the geopolitical situation present entrepreneurs with unprecedented challenges. The first step is to review and secure resources.</p>
-        <p class="context-p">Added to this is the use of artificial intelligence — enormous opportunities and potential, but also real risks when goals and expectations are set too high.</p>
-        <p class="context-p">Access to international markets is also becoming increasingly important, especially for small and medium-sized enterprises. advanteam helps you build new contacts with potential customers and investors — with our expertise and our network.</p>
-      </div>
-      <div class="signoff-area">
-        <span class="signoff-text">Yours sincerely, Udo Foerster</span>
-        <span class="signoff-sub">Founder & CEO, advanteam</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="media-row">
-    <div class="media-col"><div class="media-src">Fintech.tv · March 2025</div><div class="media-ttl">Expanding Global Business Horizons</div></div>
-    <div class="media-col"><div class="media-src">Forbes · August 2025</div><div class="media-ttl">Why Enterprise AI Still Can't Deliver on Its Promise</div></div>
-    <div class="media-col"><div class="media-src">The Business Influencer · Nov 2025</div><div class="media-ttl">Hidden Champions: It's Time to Step into the Spotlight</div></div>
-  </div>
-  <footer><span>© 2025 Udo Foerster · advanteam · Impressum · Datenschutz</span><span>LinkedIn · XING · Facebook</span></footer>
-</div>
-
-<!-- ==============================================
-     STYLE 5 — THE BOLD
-============================================== -->
-<div class="homepage s5 pt-switcher" id="s5">
   <nav>
     <div class="logo">UDO <span>FOERSTER</span></div>
     <div><a href="#">About</a><a href="#">Services</a><a href="#">Press</a><a href="#">Contact</a></div>
@@ -810,14 +585,33 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
     <span class="tick">Resilience</span><span class="tick">·</span>
     <span class="tick">Crisis Management</span><span class="tick">·</span>
     <span class="tick">Digital Transformation</span><span class="tick">·</span>
-    <span class="tick">International Networks</span><span class="tick">·</span>
-    <span class="tick">Market Positioning</span>
+    <span class="tick">International Networks</span>
+  </div>
+
+  <!-- *** FINTECH.TV VIDEO *** -->
+  <div class="video-section">
+    <div class="vs-eyebrow">Featured</div>
+    <div class="vs-title">Udo Foerster: Expanding Global Business Horizons</div>
+    <div class="vs-meta">fintech.tv · March 24, 2025</div>
+    <div class="vs-layout">
+      <div>
+        <div class="video-outer">
+          <iframe src="https://cms.fintech.tv/?p=29697&embed=1" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p class="vs-desc">In this fintech.tv interview, Foerster speaks on German-American economic relations, the challenges entrepreneurs face today, and why the Mittelstand must act now on international market access.</p>
+      </div>
+      <div class="vs-sidebar">
+        <div class="vs-sidebar-label">About</div>
+        <p>"The challenges facing entrepreneurs today are unlike anything we have seen before — but with the right network and the right strategy, they are navigable."</p>
+        <a href="https://fintech.tv/udo-foerster-expanding-global-business-horizons/" target="_blank">View on fintech.tv →</a>
+      </div>
+    </div>
   </div>
 
   <div class="vp-section">
-    <div class="vp-headline">Your partner for communication, resilience & crisis management.</div>
+    <h2>Your partner for communication, resilience &amp; crisis management.</h2>
     <p class="vp-lead">Make your company big — and above all, strong. At advanteam you will find everything you need to ensure your business remains secure and stable in an era of unprecedented disruption.</p>
-    <div class="vp-four-dark">
+    <div class="vp-four">
       <div class="vp-d"><div class="vp-d-n">01</div><h3>Proactive Resilience</h3><p>Guidance and orientation for companies that choose to act before a crisis arrives — not after.</p></div>
       <div class="vp-d"><div class="vp-d-n">02</div><h3>Crisis Advisory</h3><p>Tools and expertise for navigating corporate crises — structured, clear-headed, and decisive.</p></div>
       <div class="vp-d"><div class="vp-d-n">03</div><h3>Automated Sales</h3><p>Innovative digital sales systems that generate pipeline consistently — freeing your team to close.</p></div>
@@ -831,228 +625,34 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
       <div class="signoff-block">
         <p class="sq">"The use of artificial intelligence offers enormous opportunities — but also real risks when goals and expectations are set too high. We look forward to helping you navigate all of it."</p>
         <span class="signoff-sig">Yours sincerely, Udo Foerster</span>
-        <span class="signoff-title">Founder & CEO, advanteam</span>
+        <span class="signoff-title">Founder &amp; CEO, advanteam</span>
       </div>
     </div>
   </div>
 
-  <div class="media-section">
+  <!-- *** PRESS CARDS *** -->
+  <div class="press-section">
     <h2>International Press</h2>
-    <div class="media-grid">
-      <div class="media-c"><div class="media-src">Fintech.tv · March 2025</div><div class="media-ttl">Expanding Global Business Horizons</div></div>
-      <div class="media-c"><div class="media-src">Forbes · August 2025</div><div class="media-ttl">Why Enterprise AI Still Can't Deliver on Its Promise</div></div>
-      <div class="media-c"><div class="media-src">The Business Influencer · Nov 2025</div><div class="media-ttl">Hidden Champions: It's Time to Step into the Spotlight</div></div>
+    <div class="press-cards">
+      <a class="pcard ftv" href="https://fintech.tv/udo-foerster-expanding-global-business-horizons/" target="_blank" rel="noopener">
+        <div class="pcard-pub ftv-bar"><div class="ftv-dot"></div><span class="ftv-name">fintech.tv</span></div>
+        <div class="pcard-body"><div class="pcard-date">March 24, 2025</div><div class="pcard-title">Expanding Global Business Horizons</div><div class="pcard-blurb">On German-American economic ties and the opportunities ahead for the Mittelstand.</div><div class="pcard-cta">Watch &amp; read</div></div>
+      </a>
+      <a class="pcard forbes" href="https://www.forbes.com/sites/kolawolesamueladebayo/2025/08/18/why-enterprise-ai-still-cant-deliver-on-its-promise/" target="_blank" rel="noopener">
+        <div class="pcard-pub forbes-bar"><span class="forbes-wordmark">Forbes</span><span class="forbes-badge">FEATURED</span></div>
+        <div class="pcard-body"><div class="pcard-date">August 18, 2025</div><div class="pcard-title">Why Enterprise AI Still Can't Deliver on Its Promise</div><div class="pcard-blurb">On the gap between AI expectations and reality in mid-sized businesses.</div><div class="pcard-cta">Read on Forbes</div></div>
+      </a>
+      <a class="pcard tbi" href="https://thebusinessinfluencer.co.uk/hidden-champions-its-time-to-step-into-the-spotlight/" target="_blank" rel="noopener">
+        <div class="pcard-pub tbi-bar"><span class="tbi-name">The Business Influencer</span></div>
+        <div class="pcard-body"><div class="pcard-date">November 25, 2025</div><div class="pcard-title">Hidden Champions: It's Time to Step into the Spotlight</div><div class="pcard-blurb">Germany's strongest companies are often its least visible. Why that must change.</div><div class="pcard-cta">Read the article</div></div>
+      </a>
     </div>
   </div>
   <footer>© 2025 UDO FOERSTER · ADVANTEAM · NIEDER-OLM BEI MAINZ · IMPRESSUM</footer>
 </div>
 
-<!-- ==============================================
-     STYLE 6 — THE EDITORIAL
-============================================== -->
-<div class="homepage s6 pt-switcher" id="s6">
-  <div class="masthead">
-    <div class="mast-top">Strategic Communications · Business Consulting · Germany</div>
-    <div class="mast-title">Udo Foerster</div>
-    <div class="mast-sub">Founder & CEO, advanteam · Nieder-Olm bei Mainz</div>
-    <div class="mast-bar"><span>Est. Aachen 1999</span><span>RWTH Aachen · RTL · advanteam</span><span>30 Years of Entrepreneurship</span></div>
-  </div>
-  <div class="feature">
-    <div class="feature-text">
-      <div class="kicker">Featured</div>
-      <h1>Three Decades of Building What Lasts in the German Mittelstand</h1>
-      <p class="dek">A practitioner, an entrepreneur, and a communicator — Udo Foerster brings thirty years of hands-on experience to the companies that form the backbone of Germany's economy.</p>
-      <div class="feature-body">
-        <p>When Udo Foerster founded advanteam in Aachen in 1999, he chose the name deliberately. It encodes a conviction held since his earliest years in business: real, lasting advantage is not an individual achievement — it is the product of teams that trust each other, communicate well, and work toward a shared goal.</p>
-        <p>That principle has guided three decades of entrepreneurship — from RWTH Aachen University to the German media industry, including RTL, to the founding of his own communications and consulting firm now headquartered in Nieder-Olm near Mainz.</p>
-        <p>Today, advanteam advises companies on public relations, digital transformation, market positioning, and resilience. As a shareholder in the mein SANIHAUS group, Foerster brings operational leadership experience to every engagement — grounding his strategic advice in the reality of entrepreneurship.</p>
-        <p>"Communication, trust, and teamwork are not soft skills," he says. "They are strategic advantages." After thirty years, that message has only grown more relevant.</p>
-      </div>
-    </div>
-    <div class="feature-sidebar">
-      <div class="sidebar-img"></div>
-      <p class="sidebar-caption">Udo Foerster, Founder & CEO, advanteam, Nieder-Olm bei Mainz.</p>
-      <p class="pullquote">"A company is only as strong as the team behind it."</p>
-    </div>
-  </div>
-
-  <div class="vp-section">
-    <div class="vp-banner"><h2>Your Partner for Communication, Resilience & Crisis Management — Make your company big. And above all, strong.</h2></div>
-    <div class="vp-body">
-      <div class="vp-col">
-        <div class="vp-col-head">What advanteam delivers</div>
-        <div class="vp-item">
-          <div class="vp-item-mark">I</div>
-          <div class="vp-item-text"><h3>Proactive Action & Resilience</h3><p>Guidance and orientation for companies that choose to lead — not react — to the challenges of a complex world.</p></div>
-        </div>
-        <div class="vp-item">
-          <div class="vp-item-mark">II</div>
-          <div class="vp-item-text"><h3>Corporate Crisis Management</h3><p>Tools and structured advisory when your business faces unexpected disruption — clarity when it matters most.</p></div>
-        </div>
-        <div class="vp-item">
-          <div class="vp-item-mark">III</div>
-          <div class="vp-item-text"><h3>Automated Sales Processes</h3><p>Digital systems that build consistent pipeline — freeing your team to focus on closing and relationships.</p></div>
-        </div>
-        <div class="vp-item">
-          <div class="vp-item-mark">IV</div>
-          <div class="vp-item-text"><h3>International Communications</h3><p>Strategies with international reach — credibility and visibility beyond the German market.</p></div>
-        </div>
-      </div>
-      <div class="vp-col">
-        <div class="vp-col-head">A message from Udo Foerster</div>
-        <div class="ctx-col">
-          <p>The coronavirus crisis, the war in Ukraine, and the geopolitical situation present entrepreneurs with unprecedented challenges. The first step is to review and secure resources.</p>
-          <p>Added to this is the use of artificial intelligence. It offers enormous opportunities and potential — but also real risks when goals and expectations are set too high.</p>
-          <p>Access to international markets is also becoming increasingly important, especially for small and medium-sized enterprises. advanteam helps you build new contacts with potential customers and investors — with our expertise and our network.</p>
-          <p>We look forward to hearing from you.</p>
-        </div>
-        <div class="signoff-ed">
-          <span class="sig">Yours sincerely, Udo Foerster</span>
-          <span class="sig-sub">Founder & CEO, advanteam · Nieder-Olm bei Mainz</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="bottom-tier">
-    <div class="bt-story"><div class="bt-cat">Fintech.tv · March 2025</div><h3>Expanding Global Business Horizons</h3><p>Notes on German-American economic relations and what they mean for the Mittelstand.</p></div>
-    <div class="bt-story"><div class="bt-cat">Forbes · August 2025</div><h3>Why Enterprise AI Still Can't Deliver</h3><p>On expectations, risks, and the reality of AI adoption in mid-sized German businesses.</p></div>
-    <div class="bt-story"><div class="bt-cat">The Business Influencer · Nov 2025</div><h3>Hidden Champions: Step into the Spotlight</h3><p>Germany's best companies are often its least-known. That needs to change.</p></div>
-  </div>
-  <footer><p>© 2025 advanteam · Nieder-Olm bei Mainz</p><p>LinkedIn · XING · Facebook</p><p>Impressum · Datenschutz</p></footer>
-</div>
-
-<!-- ==============================================
-     STYLE 7 — THE GEOMETRIC
-============================================== -->
-<div class="homepage s7 pt-switcher" id="s7">
-  <nav>
-    <div class="logo">UDO FOERSTER</div>
-    <div><a href="#">Profile</a><a href="#">Services</a><a href="#">Press</a><a href="#">Kontakt</a></div>
-  </nav>
-  <div class="hero">
-    <div class="hero-left">
-      <div>
-        <div class="hero-tag"><div class="hero-tag-line"></div><div class="hero-tag-text">Germany · Strategic Authority · 30 Years</div></div>
-        <h1><span class="block">STRATEGY</span><span class="block outline">BUILDS</span><span class="block">TRUST.</span></h1>
-      </div>
-      <div>
-        <p class="hero-body">Udo Foerster and advanteam help mid-sized companies across Germany lead with clarity, communicate with authority, and grow with purpose.</p>
-        <a href="#" class="btn-amber">Engage Now</a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="hero-stat-row">
-        <div class="hero-stat"><strong>30</strong><span>Years Active</span></div>
-        <div class="hero-stat"><strong>1999</strong><span>Founded</span></div>
-        <div class="hero-stat"><strong>DE</strong><span>Mittelstand</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="band">
-    <div class="band-item">Communications</div>
-    <div class="band-item">Resilience</div>
-    <div class="band-item">Crisis Management</div>
-    <div class="band-item">International Networks</div>
-  </div>
-
-  <div class="vp-section">
-    <div class="vp-eyebrow"><div class="vp-eyebrow-line"></div><div class="vp-eyebrow-text">Your Partner For</div></div>
-    <h2>Communication, Resilience & Crisis Management</h2>
-    <p class="vp-lead">Make your company big — and above all, strong. At advanteam you will find everything you need to ensure your business remains secure and stable in the future: from proactive resilience to international communications.</p>
-    <div class="vp-four-geo">
-      <div class="vp-g"><h3>Proactive Resilience</h3><p>Guidance and orientation for companies that choose to lead rather than react — before disruption arrives.</p></div>
-      <div class="vp-g"><h3>Crisis Advisory</h3><p>Structured tools and expert counsel when your business faces unexpected disruption. Clarity under pressure.</p></div>
-      <div class="vp-g"><h3>Automated Sales</h3><p>Innovative digital sales systems that generate consistent pipeline — reducing effort, increasing reach.</p></div>
-      <div class="vp-g"><h3>International Comms</h3><p>Communication solutions of international relevance — visibility and credibility beyond Germany.</p></div>
-    </div>
-    <div class="ctx-two">
-      <div>
-        <p class="ctx-p">The coronavirus crisis, the war in Ukraine, and the geopolitical situation present entrepreneurs with unprecedented challenges. The first step is to review and secure resources. Added to this is artificial intelligence — enormous in its potential, significant in its risks.</p>
-        <p class="ctx-p">Access to international markets is becoming increasingly important for small and medium-sized enterprises. advanteam helps you build the contacts you need — with investors, clients, and partners — through our expertise and our network.</p>
-      </div>
-      <div class="signoff-geo">
-        <span class="sig">Yours sincerely,<br>Udo Foerster</span>
-        <span class="sig-sub">Founder & CEO, advanteam · Nieder-Olm bei Mainz</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="media-geo">
-    <h2>International Press</h2>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-src">Fintech.tv · March 2025</div><div class="mc-ttl">Expanding Global Business Horizons</div></div>
-      <div class="mc"><div class="mc-src">Forbes · August 2025</div><div class="mc-ttl">Why Enterprise AI Still Can't Deliver on Its Promise</div></div>
-      <div class="mc"><div class="mc-src">The Business Influencer · Nov 2025</div><div class="mc-ttl">Hidden Champions: It's Time to Step into the Spotlight</div></div>
-    </div>
-  </div>
-  <footer><span>© 2025 UDO FOERSTER</span><span>ADVANTEAM · NIEDER-OLM BEI MAINZ</span><span>IMPRESSUM · DATENSCHUTZ</span></footer>
-</div>
-
-<!-- ==============================================
-     STYLE 8 — EXECUTIVE PORTRAIT
-============================================== -->
-<div class="homepage s8 pt-switcher" id="s8">
-  <div class="hero">
-    <nav>
-      <div class="logo">UDO FOERSTER</div>
-      <div><a href="#">About</a><a href="#">Services</a><a href="#">Press</a><a href="#">Contact</a></div>
-    </nav>
-    <div class="hero-content">
-      <div class="hero-label">Strategic Advisor · Entrepreneur · Germany</div>
-      <h1>30 Years.<br>One Principle.</h1>
-      <p class="hero-sub">Teamwork creates lasting advantage. That is not philosophy — it is three decades of hard-won entrepreneurial truth.</p>
-    </div>
-  </div>
-
-  <div class="vp-section">
-    <div class="vp-main">
-      <h2>Your partner for communication, resilience & crisis management.</h2>
-      <p class="vp-intro">Make your company big — and above all, strong. At advanteam you will find everything you need to ensure your business remains secure, stable, and competitive in a world of unprecedented disruption.</p>
-      <div class="vp-bullets-2col">
-        <div class="vp-b"><h3>Proactive Resilience</h3><p>Guidance for companies that choose to act before a crisis arrives — building strength while others wait.</p></div>
-        <div class="vp-b"><h3>Crisis Management</h3><p>Structured tools and expert advisory when your business needs clarity and decisive action under pressure.</p></div>
-        <div class="vp-b"><h3>Automated Sales</h3><p>Digital sales systems that build consistent pipeline — innovative, efficient, and built to scale.</p></div>
-        <div class="vp-b"><h3>International Communications</h3><p>Strategies with international reach — helping German companies build credibility beyond their home market.</p></div>
-      </div>
-      <div class="vp-context">
-        <p>The coronavirus crisis, the war in Ukraine, and the geopolitical situation present entrepreneurs with unprecedented challenges. The first step is to review and secure resources. Added to this is the use of artificial intelligence — enormous opportunities and potential, but also real risks when goals and expectations are set too high.</p>
-        <p>Access to international markets is also becoming increasingly important for small and medium-sized enterprises. advanteam helps you build new contacts with potential customers and investors — with our expertise and our network. We look forward to hearing from you.</p>
-      </div>
-    </div>
-    <div class="vp-sidebar">
-      <div class="vs-label">A word from Udo Foerster</div>
-      <div class="signoff-portrait">
-        <p class="sp-quote">"Communication, trust, and teamwork are not soft skills — they are strategic advantages. After three decades in business, that principle shapes everything we do."</p>
-        <span class="sp-sig">Yours sincerely, Udo Foerster</span>
-        <span class="sp-sub">Founder & CEO, advanteam</span>
-      </div>
-      <div class="vp-facts">
-        <div class="vp-fact"><div class="vp-fact-lbl">Founded</div><div class="vp-fact-val">Aachen, 1999</div></div>
-        <div class="vp-fact"><div class="vp-fact-lbl">Headquarters</div><div class="vp-fact-val">Nieder-Olm bei Mainz</div></div>
-        <div class="vp-fact"><div class="vp-fact-lbl">Education</div><div class="vp-fact-val">RWTH Aachen University</div></div>
-        <div class="vp-fact"><div class="vp-fact-lbl">Background</div><div class="vp-fact-val">RTL · Media Industry</div></div>
-        <div class="vp-fact"><div class="vp-fact-lbl">Board Role</div><div class="vp-fact-val">mein SANIHAUS Group</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="services-dark">
-    <h2>What advanteam delivers.</h2>
-    <div class="svc-grid">
-      <div class="svc-card"><h3>Public Relations & Communications</h3><p>International media presence and reputation management for companies that want to be taken seriously — at home and abroad.</p></div>
-      <div class="svc-card"><h3>Digital Transformation</h3><p>Pragmatic strategies for AI adoption and digital process change — grounded in business reality, not vendor promises.</p></div>
-      <div class="svc-card"><h3>Crisis & Resilience</h3><p>Proactive preparation and structured response for the challenges that disrupt businesses — geopolitical, technological, reputational.</p></div>
-      <div class="svc-card"><h3>International Market Access</h3><p>Introductions to investors, clients, and partners built over thirty years — opening doors that matter for your growth.</p></div>
-    </div>
-  </div>
-  <footer><p>© 2025 advanteam Kommunikation & Unternehmensberatung · Nieder-Olm bei Mainz</p><p>LinkedIn · XING · Impressum · Datenschutz</p></footer>
-</div>
-
-<!-- ==============================================
-     STYLE 9 — THE CONSULTANT
-============================================== -->
-<div class="homepage s9 pt-switcher" id="s9">
+<!-- ====================== STYLE 4 — CONSULTANT ====================== -->
+<div class="homepage s4 pt-switcher" id="s4">
   <nav>
     <div class="logo">Udo Foerster</div>
     <div><a href="#">About</a><a href="#">Services</a><a href="#">Press</a><a href="#" class="btn-cta-nav">Contact</a></div>
@@ -1061,7 +661,7 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
     <div class="hero-text">
       <div class="trust-bar"><div class="trust-dot"></div><span class="trust-text">30 Years · Mittelstand · Germany</span></div>
       <h1>Your company deserves to be seen — and trusted.</h1>
-      <p class="hero-sub">Udo Foerster and advanteam help Germany's mid-sized businesses communicate with authority, navigate complexity, and grow sustainably over the long term.</p>
+      <p class="hero-sub">Udo Foerster and advanteam help Germany's mid-sized businesses communicate with authority, navigate complexity, and grow sustainably.</p>
       <div class="cta-pair"><a href="#" class="btn-green">Work With Udo</a><a href="#" class="link-btn">Learn More →</a></div>
     </div>
     <div class="hero-img-side"></div>
@@ -1073,45 +673,69 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
     <div class="tnum"><div class="tnum-val">DE</div><div class="tnum-label">Mittelstand focus</div></div>
   </div>
 
+  <!-- *** FINTECH.TV VIDEO *** -->
+  <div class="video-section">
+    <div class="vs-eyebrow">Watch</div>
+    <div class="vs-title">Udo Foerster: Expanding Global Business Horizons</div>
+    <div class="vs-meta">fintech.tv · March 2025</div>
+    <div class="vs-layout">
+      <div>
+        <div class="video-outer">
+          <iframe src="https://cms.fintech.tv/?p=29697&embed=1" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p class="vs-desc">Udo Foerster speaks with fintech.tv on German-American economic relations, the geopolitical challenges facing entrepreneurs today, and why international market access has become critical for Germany's Mittelstand.</p>
+      </div>
+      <div class="vs-sidebar">
+        <div class="vs-sidebar-label">About This Interview</div>
+        <p>As a 30-year entrepreneur and strategic advisor, Udo Foerster speaks on the market forces shaping Germany's business landscape — and what companies can do to stay ahead.</p>
+        <a href="https://fintech.tv/udo-foerster-expanding-global-business-horizons/" target="_blank">Watch on fintech.tv →</a>
+      </div>
+    </div>
+  </div>
+
   <div class="vp-section">
-    <h2>Your partner for communication, resilience & crisis management.</h2>
+    <h2>Your partner for communication, resilience &amp; crisis management.</h2>
     <p class="vp-intro">Make your company big — and above all, strong. At advanteam you will find everything you need to ensure your business remains secure and stable in the future. Because lasting success is built on trust, clear communication, and a team that knows how to navigate what comes next.</p>
     <div class="vp-four-cards">
-      <div class="vp-fc"><div class="vp-icon">🧭</div><div class="vp-fc-text"><h3>Proactive Action & Resilience</h3><p>Guidance for companies that choose to lead — not react — building organisational strength before disruption arrives.</p></div></div>
+      <div class="vp-fc"><div class="vp-icon">🧭</div><div class="vp-fc-text"><h3>Proactive Action &amp; Resilience</h3><p>Guidance for companies that choose to lead — not react — building organisational strength before disruption arrives.</p></div></div>
       <div class="vp-fc"><div class="vp-icon">⚡</div><div class="vp-fc-text"><h3>Corporate Crisis Management</h3><p>Tools and advisory for navigating crises with structure and clarity — protecting what you have built.</p></div></div>
       <div class="vp-fc"><div class="vp-icon">⚙️</div><div class="vp-fc-text"><h3>Automated Sales Processes</h3><p>Innovative, digitally-enabled systems that generate consistent pipeline — built to scale with your business.</p></div></div>
       <div class="vp-fc"><div class="vp-icon">🌍</div><div class="vp-fc-text"><h3>International Communications</h3><p>Communication strategies of international relevance — credibility and visibility that reaches beyond Germany.</p></div></div>
     </div>
     <div class="context-two">
-      <div>
-        <p class="ctx-p">The coronavirus crisis, the war in Ukraine, and the geopolitical situation present entrepreneurs with unprecedented challenges. The first step is to review and secure resources. Added to this is the use of artificial intelligence — enormous in its potential, but significant in its risks when expectations are set too high.</p>
-      </div>
-      <div>
-        <p class="ctx-p">Access to international markets is also becoming increasingly important for small and medium-sized enterprises. advanteam helps you build new contacts with potential customers and investors — with our expertise and our network. We look forward to hearing from you.</p>
-      </div>
+      <div><p class="ctx-p">The coronavirus crisis, the war in Ukraine, and the geopolitical situation present entrepreneurs with unprecedented challenges. The first step is to review and secure resources. Added to this is the use of artificial intelligence — enormous in its potential, but significant in its risks when expectations are set too high.</p></div>
+      <div><p class="ctx-p">Access to international markets is also becoming increasingly important for small and medium-sized enterprises. advanteam helps you build new contacts with potential customers and investors — with our expertise and our network. We look forward to hearing from you.</p></div>
     </div>
     <div class="signoff-card">
       <p class="sq">"Communication, trust, and teamwork are not soft skills — they are strategic advantages. After three decades in business, that conviction shapes everything advanteam does for the companies we serve."</p>
       <span class="sig">Yours sincerely, Udo Foerster</span>
-      <span class="sig-sub">Founder & CEO, advanteam · Nieder-Olm bei Mainz</span>
+      <span class="sig-sub">Founder &amp; CEO, advanteam · Nieder-Olm bei Mainz</span>
     </div>
   </div>
 
-  <div class="media-section">
+  <!-- *** PRESS CARDS *** -->
+  <div class="press-section">
     <h2>In the International Press</h2>
-    <div class="media-list">
-      <div class="media-item"><div class="mi-pub">Fintech.tv · March 2025</div><div class="mi-ttl">Expanding Global Business Horizons — on German-American Economic Relations</div></div>
-      <div class="media-item"><div class="mi-pub">Forbes · August 2025</div><div class="mi-ttl">Why Enterprise AI Still Can't Deliver on Its Promise</div></div>
-      <div class="media-item"><div class="mi-pub">The Business Influencer · Nov 2025</div><div class="mi-ttl">Hidden Champions: It's Time to Step into the Spotlight</div></div>
+    <div class="press-cards">
+      <a class="pcard ftv" href="https://fintech.tv/udo-foerster-expanding-global-business-horizons/" target="_blank" rel="noopener">
+        <div class="pcard-pub ftv-bar"><div class="ftv-dot"></div><span class="ftv-name">fintech.tv</span></div>
+        <div class="pcard-body"><div class="pcard-date">March 24, 2025</div><div class="pcard-title">Expanding Global Business Horizons</div><div class="pcard-blurb">On German-American economic ties and the opportunities ahead for the Mittelstand.</div><div class="pcard-cta">Watch &amp; read</div></div>
+      </a>
+      <a class="pcard forbes" href="https://www.forbes.com/sites/kolawolesamueladebayo/2025/08/18/why-enterprise-ai-still-cant-deliver-on-its-promise/" target="_blank" rel="noopener">
+        <div class="pcard-pub forbes-bar"><span class="forbes-wordmark">Forbes</span><span class="forbes-badge">FEATURED</span></div>
+        <div class="pcard-body"><div class="pcard-date">August 18, 2025</div><div class="pcard-title">Why Enterprise AI Still Can't Deliver on Its Promise</div><div class="pcard-blurb">On the gap between AI expectations and reality in mid-sized businesses.</div><div class="pcard-cta">Read on Forbes</div></div>
+      </a>
+      <a class="pcard tbi" href="https://thebusinessinfluencer.co.uk/hidden-champions-its-time-to-step-into-the-spotlight/" target="_blank" rel="noopener">
+        <div class="pcard-pub tbi-bar"><span class="tbi-name">The Business Influencer</span></div>
+        <div class="pcard-body"><div class="pcard-date">November 25, 2025</div><div class="pcard-title">Hidden Champions: It's Time to Step into the Spotlight</div><div class="pcard-blurb">Germany's strongest companies are often its least visible. Why that must change.</div><div class="pcard-cta">Read the article</div></div>
+      </a>
     </div>
   </div>
   <footer><div class="footer-name">Udo Foerster</div><p>© 2025 advanteam · Nieder-Olm bei Mainz · Impressum · Datenschutz</p></footer>
 </div>
 
-<!-- ==============================================
-     STYLE 10 — THE PIONEER
-============================================== -->
-<div class="homepage s10 pt-switcher" id="s10">
+<!-- ====================== STYLE 5 — PIONEER ====================== -->
+<div class="homepage s5 pt-switcher" id="s5">
   <nav>
     <div class="logo">UDO FOERSTER</div>
     <div><a href="#">About</a><a href="#">Expertise</a><a href="#">Press</a><a href="#">Contact</a></div>
@@ -1124,7 +748,27 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
     </div>
     <div>
       <div class="portrait-sq"></div>
-      <div class="portrait-caption"><strong>Udo Foerster</strong>Founder & CEO, advanteam<br>Nieder-Olm bei Mainz, Germany</div>
+      <div class="portrait-caption"><strong>Udo Foerster</strong>Founder &amp; CEO, advanteam<br>Nieder-Olm bei Mainz, Germany</div>
+    </div>
+  </div>
+
+  <!-- *** FINTECH.TV VIDEO *** -->
+  <div class="video-section">
+    <div class="vs-eyebrow">In Conversation</div>
+    <div class="vs-title">Expanding Global Business Horizons</div>
+    <div class="vs-meta">fintech.tv · March 24, 2025</div>
+    <div class="vs-layout">
+      <div>
+        <div class="video-outer">
+          <iframe src="https://cms.fintech.tv/?p=29697&embed=1" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p class="vs-desc">Udo Foerster speaks with fintech.tv on German-American economic relations, the challenges of AI adoption, and why Germany's hidden champions must step into the international spotlight.</p>
+      </div>
+      <div class="vs-sidebar">
+        <div class="vs-sidebar-label">From the Interview</div>
+        <p>"The challenges facing entrepreneurs today are unlike anything we have seen before — but with the right team and the right counsel, they are navigable."</p>
+        <a href="https://fintech.tv/udo-foerster-expanding-global-business-horizons/" target="_blank">View full feature →</a>
+      </div>
     </div>
   </div>
 
@@ -1132,17 +776,17 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
     <div class="vp-label">Your Partner For</div>
     <div class="vp-two-col">
       <div>
-        <div class="vp-col-head">Communication, resilience & crisis management.</div>
+        <div class="vp-col-head">Communication, resilience &amp; crisis management.</div>
         <p class="vp-p">Make your company big — and above all, strong. At advanteam you will find everything you need to ensure your business remains secure and stable in the future.</p>
         <p class="vp-p">The coronavirus crisis, the war in Ukraine, and the geopolitical situation present entrepreneurs with unprecedented challenges. The first step is to review and secure resources. Added to this is the use of artificial intelligence — enormous opportunities, but also real risks when goals and expectations are set too high.</p>
         <p class="vp-p">Access to international markets is becoming increasingly important for small and medium-sized enterprises. advanteam helps you build the contacts you need — with the right investors, the right clients, the right partners.</p>
       </div>
       <div>
         <div class="vp-four-list">
-          <div class="vp-li"><div class="vp-li-num">01</div><div class="vp-li-text"><h3>Proactive Action & Resilience</h3><p>Guidance for companies that choose to lead rather than react — building strength before disruption arrives.</p></div></div>
-          <div class="vp-li"><div class="vp-li-num">02</div><div class="vp-li-text"><h3>Corporate Crisis Management</h3><p>Tools and structured advisory for navigating crises with clarity, decisiveness, and minimal disruption.</p></div></div>
-          <div class="vp-li"><div class="vp-li-num">03</div><div class="vp-li-text"><h3>Automated Sales Processes</h3><p>Innovative digital systems that generate consistent pipeline — intelligent, scalable, and efficient.</p></div></div>
-          <div class="vp-li"><div class="vp-li-num">04</div><div class="vp-li-text"><h3>International Communications</h3><p>Communication solutions of international relevance — credibility and visibility beyond Germany.</p></div></div>
+          <div class="vp-li"><div class="vp-li-num">01</div><div class="vp-li-text"><h3>Proactive Action &amp; Resilience</h3><p>Guidance for companies that choose to lead rather than react.</p></div></div>
+          <div class="vp-li"><div class="vp-li-num">02</div><div class="vp-li-text"><h3>Corporate Crisis Management</h3><p>Tools and structured advisory for navigating crises with clarity and decisiveness.</p></div></div>
+          <div class="vp-li"><div class="vp-li-num">03</div><div class="vp-li-text"><h3>Automated Sales Processes</h3><p>Innovative digital systems that generate consistent pipeline — intelligent and scalable.</p></div></div>
+          <div class="vp-li"><div class="vp-li-num">04</div><div class="vp-li-text"><h3>International Communications</h3><p>Communication solutions of international relevance — credibility beyond Germany.</p></div></div>
         </div>
       </div>
     </div>
@@ -1150,24 +794,32 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
 
   <div class="manifesto-strip">
     <blockquote>"We look forward to hearing from you — and to helping your business become not just bigger, but stronger."</blockquote>
-    <div class="sig-block">
-      <span class="ms-sig">Yours sincerely, Udo Foerster</span>
-      <span class="ms-sub">Founder & CEO, advanteam · Nieder-Olm bei Mainz</span>
-    </div>
+    <div class="sig-block"><span class="ms-sig">Yours sincerely, Udo Foerster</span><span class="ms-sub">Founder &amp; CEO, advanteam · Nieder-Olm bei Mainz</span></div>
   </div>
 
   <div class="in-threes">
-    <div class="third"><div class="third-label">Who He Is</div><h2>Entrepreneur & Advisor</h2><p>Udo Foerster founded advanteam in Aachen in 1999 after studying at RWTH and working with RTL. Today he leads from Nieder-Olm, advising businesses across Germany — while remaining active as a shareholder of the mein SANIHAUS group.</p></div>
-    <div class="third"><div class="third-label">What He Does</div><h2>Strategy & Communications</h2><p>advanteam combines public relations, business consulting, digital transformation advisory, and international market access — built around the conviction that sustainable growth is always a team achievement.</p></div>
+    <div class="third"><div class="third-label">Who He Is</div><h2>Entrepreneur &amp; Advisor</h2><p>Udo Foerster founded advanteam in Aachen in 1999 after studying at RWTH and working with RTL. Today he leads from Nieder-Olm, advising businesses across Germany — while remaining active as a shareholder of the mein SANIHAUS group.</p></div>
+    <div class="third"><div class="third-label">What He Does</div><h2>Strategy &amp; Communications</h2><p>advanteam combines public relations, business consulting, digital transformation advisory, and international market access — built around the conviction that sustainable growth is always a team achievement.</p></div>
     <div class="third"><div class="third-label">Why It Matters</div><h2>Germany's Hidden Champions Need a Voice</h2><p>Germany's best companies are often its least-known. They deserve communications and advisory partners who understand their world — and who can help them lead it, nationally and internationally.</p></div>
   </div>
 
-  <div class="media-row">
-    <div class="media-label">Selected International Press</div>
-    <div class="media-items">
-      <div class="media-item"><div class="mi-src">Fintech.tv · March 2025</div><div class="mi-title">Expanding Global Business Horizons</div></div>
-      <div class="media-item"><div class="mi-src">Forbes · August 2025</div><div class="mi-title">Why Enterprise AI Still Can't Deliver on Its Promise</div></div>
-      <div class="media-item"><div class="mi-src">The Business Influencer · Nov 2025</div><div class="mi-title">Hidden Champions: It's Time to Step into the Spotlight</div></div>
+  <!-- *** PRESS CARDS *** -->
+  <div class="press-section">
+    <div class="ps-label">Selected International Press</div>
+    <div class="press-cards">
+      <a class="pcard ftv" href="https://fintech.tv/udo-foerster-expanding-global-business-horizons/" target="_blank" rel="noopener">
+        <div class="pcard-pub ftv-bar"><div class="ftv-dot"></div><span class="ftv-name">fintech.tv</span></div>
+        <div class="pcard-body"><div class="pcard-date">March 24, 2025</div><div class="pcard-title">Expanding Global Business Horizons</div><div class="pcard-blurb">On German-American economic ties and the opportunities ahead for the Mittelstand.</div><div class="pcard-cta">Watch &amp; read</div></div>
+      </a>
+      <a class="pcard forbes" href="https://www.forbes.com/sites/kolawolesamueladebayo/2025/08/18/why-enterprise-ai-still-cant-deliver-on-its-promise/" target="_blank" rel="noopener">
+        <div class="pcard-pub forbes-bar"><span class="forbes-wordmark">Forbes</span><span class="forbes-badge">FEATURED</span></div>
+        <div class="pcard-body"><div class="pcard-date">August 18, 2025</div><div class="pcard-title">Why Enterprise AI Still Can't Deliver on Its Promise</div><div class="pcard-blurb">On the gap between AI expectations and reality in mid-sized businesses.</div><div class="pcard-cta">Read on Forbes</div></div>
+      </a>
+      <a class="pcard tbi" href="https://thebusinessinfluencer.co.uk/hidden-champions-its-time-to-step-into-the-spotlight/" target="_blank" rel="noopener">
+        <div class="pcard-pub tbi-bar"><span class="tbi-name">The Business Influencer</span></div>
+        <div class="pcard-body"><div class="pcard-date">November 25, 2025</di
+        </div>
+      </a>
     </div>
   </div>
   <footer><span>© 2025 Udo Foerster · advanteam</span><span>Nieder-Olm bei Mainz · Impressum · Datenschutz</span></footer>
@@ -1175,79 +827,12 @@ body { font-family: 'Inter', sans-serif; background: #f0f0ee; }
 
 <script>
 function show(n) {
-  document.querySelectorAll('.homepage').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('#switcher button').forEach(el => el.classList.remove('active'));
-  document.getElementById('s' + n).classList.add('active');
-  document.getElementById('btn' + n).classList.add('active');
+  document.querySelectorAll('.homepage').forEach(function(el){el.classList.remove('active')});
+  document.querySelectorAll('#switcher button').forEach(function(el){el.classList.remove('active')});
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('btn'+n).classList.add('active');
   window.scrollTo(0,0);
 }
 </script>
-
-<script>
-var FTV_VIDEO = '<div class="video-wrap"><iframe src="https://cms.fintech.tv/?p=29697&embed=1" frameborder="0" allowfullscreen></iframe></div>';
-
-var PRESS_CARDS = '<div class="pg">' +
-  '<a class="pc" href="https://fintech.tv/udo-foerster-expanding-global-business-horizons/" target="_blank" rel="noopener">' +
-    '<div class="pc-bar ftv-bar"><div class="ftv-dot"></div><span class="ftv-name">fintech.tv</span></div>' +
-    '<div class="pc-body"><div class="pc-date">March 24, 2025</div><div class="pc-ttl">Expanding Global Business Horizons</div><div class="pc-blurb">On German-American economic relations and what they mean for the Mittelstand.</div><div class="pc-cta">Watch & read</div></div>' +
-  '</a>' +
-  '<a class="pc" href="https://www.forbes.com/sites/kolawolesamueladebayo/2025/08/18/why-enterprise-ai-still-cant-deliver-on-its-promise/" target="_blank" rel="noopener">' +
-    '<div class="pc-bar forbes-bar"><span class="forbes-name">Forbes</span><span class="forbes-tag">FEATURED</span></div>' +
-    '<div class="pc-body"><div class="pc-date">August 18, 2025</div><div class="pc-ttl">Why Enterprise AI Still Can't Deliver on Its Promise</div><div class="pc-blurb">Udo Foerster on the gap between AI expectations and reality in mid-sized businesses.</div><div class="pc-cta">Read on Forbes</div></div>' +
-  '</a>' +
-  '<a class="pc" href="https://thebusinessinfluencer.co.uk/hidden-champions-its-time-to-step-into-the-spotlight/" target="_blank" rel="noopener">' +
-    '<div class="pc-bar tbi-bar"><div class="tbi-name">The Business Influencer</div></div>' +
-    '<div class="pc-body"><div class="pc-date">November 25, 2025</div><div class="pc-ttl">Hidden Champions: It's Time to Step into the Spotlight</div><div class="pc-blurb">Germany's strongest companies are often its least visible. Why that must change.</div><div class="pc-cta">Read the article</div></div>' +
-  '</a>' +
-'</div>';
-
-// Inject video after stats/kpi bars in each style
-document.querySelectorAll('.homepage').forEach(function(hp) {
-  var id = hp.id;
-  var styleNum = id.replace('s','');
-  
-  // find the stats-bar or kpi-row or trust-nums or band (first section after hero)
-  var anchor = hp.querySelector('.stats-bar, .kpi-row, .trust-nums, .band, .mast-bar + .feature, .mega-hero');
-  if (!anchor) return;
-  
-  // Create video block
-  var vb = document.createElement('div');
-  vb.className = 'vid-section';
-  vb.style.cssText = 'border-bottom:1px solid rgba(128,128,128,0.2)';
-  
-  var layout = document.createElement('div');
-  layout.className = 'video-layout';
-  
-  var mainCol = document.createElement('div');
-  mainCol.innerHTML = '<div class="video-eyebrow">Featured Interview</div>' +
-    '<div class="video-ttl">Udo Foerster: Expanding Global Business Horizons</div>' +
-    '<div class="video-date">fintech.tv · March 24, 2025</div>' +
-    FTV_VIDEO +
-    '<p class="video-desc">Udo Foerster speaks with fintech.tv on German-American economic relations, the challenges facing Germany's Mittelstand today, and why international market access has become a strategic necessity for mid-sized businesses.</p>';
-  
-  var sideCol = document.createElement('div');
-  sideCol.style.cssText = 'padding-top:28px';
-  sideCol.innerHTML = '<p style="font-family:Inter,sans-serif;font-size:13px;line-height:1.8;margin-bottom:12px;opacity:0.6">' +
-    '"The challenges facing entrepreneurs today are unlike anything we have seen before — but with the right team and the right counsel, they are navigable."</p>' +
-    '<span style="font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.4">— Udo Foerster</span>';
-  
-  layout.appendChild(mainCol);
-  layout.appendChild(sideCol);
-  vb.appendChild(layout);
-  
-  // Insert after the anchor's nextSibling (so after stats bar)
-  anchor.parentNode.insertBefore(vb, anchor.nextSibling);
-  
-  // Now replace all old plain media strips with rich press grid
-  var mediaStrips = hp.querySelectorAll('.media-strip, .press, .press-section, .media-section, .media-row, .media-geo, .bottom-tier');
-  mediaStrips.forEach(function(ms) {
-    // get the heading if any
-    var heading = ms.querySelector('h2, .section-eyebrow');
-    var headHTML = heading ? heading.outerHTML : '<h2 style="margin-bottom:24px">In the International Press</h2>';
-    ms.innerHTML = headHTML + PRESS_CARDS;
-  });
-});
-</script>
-
 </body>
 </html>
