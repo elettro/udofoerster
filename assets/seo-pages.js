@@ -59,6 +59,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     footerGrid.appendChild(address);
   }
 
+  document.querySelectorAll('.dark .card').forEach(card=>{
+    card.style.setProperty('background','#102a44','important');
+    card.style.setProperty('color','#ffffff','important');
+    card.style.setProperty('border-color','rgba(255,255,255,.22)','important');
+    card.querySelectorAll('h3').forEach(el=>el.style.setProperty('color','#ffffff','important'));
+    card.querySelectorAll('p').forEach(el=>el.style.setProperty('color','#d6e4ee','important'));
+  });
+
   const profileImage=document.querySelector('.profile img');
   if(profileImage){
     profileImage.src='/images/udo-foerster-official.jpg';
