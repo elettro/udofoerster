@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /v1/
+Disallow: /single-page-demo/
+
+Sitemap: https://udofoerster.com/sitemap.xml
