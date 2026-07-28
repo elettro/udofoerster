@@ -51,6 +51,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     }));
   }
 
+  const footerGrid=document.querySelector('.footergrid');
+  if(footerGrid&&!footerGrid.querySelector('.official-address')){
+    const address=document.createElement('address');
+    address.className='official-address';
+    address.innerHTML='<strong>Advanteam</strong><br>Dietrich-Bonhoeffer-Straße 14<br>55268 Nieder-Olm';
+    footerGrid.appendChild(address);
+  }
+
   const profileImage=document.querySelector('.profile img');
   if(profileImage){
     profileImage.src='/images/udo-foerster-official.jpg';
