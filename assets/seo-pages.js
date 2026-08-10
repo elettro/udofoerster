@@ -23,18 +23,23 @@ document.addEventListener('DOMContentLoaded',()=>{
   const links=isGerman?germanLinks:englishLinks;
   const languageTarget=isGerman?'/':'/de/';
   const languageLabel=isGerman?'EN':'DE';
+  const advanteamLink='https://elettro.github.io/advanteam/';
+  const advanteamLogo='/images/ADVANTEAM_logo_transparent_4000px.png';
 
   const isActive=href=>{
     if(href==='/media-authority/'||href==='/digital-systems/')return path.startsWith(href);
     return path===href;
   };
 
+  const advanteamMarkup=`<a class="advanteam-nav-link" href="${advanteamLink}" target="_blank" rel="noopener noreferrer" aria-label="Visit Advanteam website"><img src="${advanteamLogo}" alt="Advanteam"></a>`;
+
   if(nav){
     nav.innerHTML=links.map(([href,label])=>`<a${isActive(href)?' class="active"':''} href="${href}">${label}</a>`).join('')+
+      advanteamMarkup+
       `<span class="language"><a href="${languageTarget}" lang="${isGerman?'en':'de'}">${languageLabel}</a></span>`;
   }
   if(panel){
-    panel.innerHTML=`<div class="mobile-panel-inner"><a href="${isGerman?'/de/':'/'}">${isGerman?'Startseite':'Home'}</a>${links.map(([href,label])=>`<a href="${href}">${label}</a>`).join('')}<a href="${languageTarget}" lang="${isGerman?'en':'de'}">${isGerman?'English':'Deutsch'}</a></div>`;
+    panel.innerHTML=`<div class="mobile-panel-inner"><a href="${isGerman?'/de/':'/'}">${isGerman?'Startseite':'Home'}</a>${links.map(([href,label])=>`<a href="${href}">${label}</a>`).join('')}<a class="advanteam-mobile-link" href="${advanteamLink}" target="_blank" rel="noopener noreferrer" aria-label="Visit Advanteam website"><img src="${advanteamLogo}" alt="Advanteam"></a><a href="${languageTarget}" lang="${isGerman?'en':'de'}">${isGerman?'English':'Deutsch'}</a></div>`;
   }
 
   const btn=document.querySelector('.menu-btn');
